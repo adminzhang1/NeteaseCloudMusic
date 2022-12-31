@@ -1,0 +1,215 @@
+// 自己的重置样式代码
+*{
+  padding: 0;
+  margin: 0;
+}
+html{
+  height: 100%;
+  font-size: 12px;
+}
+body{
+  height: 100%;
+  color: #333;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
+  word-break: break-all;
+  background: #f5f5f5;
+}
+ul,
+h1,
+h3,
+h4,
+p,
+dl,
+dd {
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+  user-select: text;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+  font-size: 100%;
+}
+a{
+  text-decoration: none;
+  color: #333;
+  outline: none;
+}
+em,
+i{
+  font-style: normal;
+  text-align: left;
+  font-size: inherit;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="checkbox"]{
+  padding: 0;
+  outline: none;
+  border: none;
+  -webkit-appearance: auto;
+  appearance: auto;
+  &::placeholder{
+    color: #ccc;
+  }
+}
+input[type="password"]::-ms-reveal{
+  display:none;
+}
+[hidefocus]{
+  outline: none;
+}
+img{
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+}
+img, .txt{
+  border: 0;
+}
+ul{
+  list-style: none;
+}
+li {
+  list-style: none;
+}
+#app{
+  width: 100%;
+  height: 100%;
+  // user-select: none;
+}
+.container{
+  width: 980px;
+  min-width: 980px;
+  box-sizing: content-box;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.ellipsis-2 {
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.pr {
+  position: relative;
+  zoom: 1;
+}
+.pa {
+  position: absolute;
+  zoom: 1;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
+  clear: both;
+}
+.f-hide{
+  display: none!important;
+}
+.f-thide{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+// 头部一级导航的相同样式
+.m-nav li, .m-nav li span, .m-nav a, .m-nav a em{
+  float: left;
+  height: 70px;
+  font-size: 14px;
+}
+// 头部二级导航的相同样式
+.m-subnav .nav li, .m-subnav .nav a{
+  float: left;
+  height: 34px;
+  text-align: center;
+}
+// 头部搜索框相同样式
+.m-srch, .m-srch .srchbg{
+  float: right;
+  width: 158px;
+  height: 32px;
+}
+// 底部主要内容盒子
+.m-ft{
+  width: 980px;
+  margin: 0 auto;
+}
+// 字体样式和颜色
+.s-fc0{
+  color: #000;
+}
+.s-fc3{
+  color: #666;
+}
+.s-fc7{
+  color: #0c73c2;
+}
+// 回到顶部
+.m-back{
+  background: url('@/assets/icons/sprite.png') no-repeat 0 9999px;
+}
+// 头部icons精灵图
+.m-top .logo,
+.m-top .cor,
+.m-tophead,
+.m-topvd,
+.m-srch .srchbg{
+  background: url('@/assets/icons/topbar.png') no-repeat 0 9999px;
+}
+// .u-icn、.u-icn2、.u-icn3的相同样式
+.u-icn, .u-icn2, .u-icn3{
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+}
+// 搜索结果的icon
+.u-icn,
+.u-title-1 .out .icon{
+  background: url('@/assets/icons/icon.png') no-repeat 0 9999px;
+}
+// 搜索结果相同样式
+.u-icn-26, .u-icn-27, .u-icn-28, .u-icn-29{
+  width: 14px;
+  height: 15px;
+  background-position: -35px -300px;
+}
+.u-icn-27{
+  background-position: -50px -300px;
+}
+.u-icn-28{
+  background-position: -35px -320px;
+}
+.u-icn-29{
+  background-position: -50px -320px;
+}

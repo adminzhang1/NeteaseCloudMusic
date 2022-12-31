@@ -1,32 +1,35 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <Header />
+    <router-view />
+    <Footer />
+    <a href="javascript:;" title="回到顶部" class="m-back f-hide" id="g_backtop">回到顶部</a>
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+export default {
+  components: {
+    Header,Footer
+  }
 }
+</script>
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<style lang="less" scoped>
+.m-back{
+  display: block;
+  position: fixed;
+  left: 50%;
+  bottom: 160px;
+  width: 49px;
+  height: 44px;
+  text-indent: -9999px;
+  margin-left: 500px;
+  background-position: -265px -47px;
+  &:hover{
+    background-position: -325px -47px;
   }
 }
 </style>
