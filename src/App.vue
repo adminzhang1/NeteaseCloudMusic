@@ -3,7 +3,7 @@
     <Header />
     <router-view />
     <Footer />
-    <a href="javascript:;" title="回到顶部" class="m-back f-hide" id="g_backtop">回到顶部</a>
+    <a href="javascript:;" title="回到顶部" class="m-back" id="g_backtop" @click="goTop">回到顶部</a>
   </div>
 </template>
 
@@ -13,6 +13,11 @@ import Footer from '@/components/Footer'
 export default {
   components: {
     Header,Footer
+  },
+  methods: {
+    goTop(){
+      window.scrollTo(0,0)
+    }
   }
 }
 </script>

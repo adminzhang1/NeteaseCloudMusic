@@ -142,6 +142,18 @@ li {
   white-space: nowrap;
   word-wrap: normal;
 }
+// 版心和背景
+.g-bd, .g-bd1, .g-bd2, .g-bd3, .g-bd4, .g-bd5, .g-bd6, .g-bd7{
+  width: 980px;
+  min-height: 700px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid #d3d3d3;
+  border-width: 0 1px;
+}
+.g-bd1{
+  background: url('@/assets/icons/wrap1.png') repeat-y 100% 100%;
+}
 // 头部一级导航的相同样式
 .m-nav li, .m-nav li span, .m-nav a, .m-nav a em{
   float: left;
@@ -175,6 +187,12 @@ li {
 .s-fc7{
   color: #0c73c2;
 }
+.f-ff2{
+  font-family: "Microsoft Yahei", Arial, Helvetica, sans-serif;
+}
+.f-fs1{
+  font-size: 14px;
+}
 // 回到顶部
 .m-back{
   background: url('@/assets/icons/sprite.png') no-repeat 0 9999px;
@@ -193,7 +211,7 @@ li {
   overflow: hidden;
   vertical-align: middle;
 }
-// 搜索结果的icon
+// 第一个大icon
 .u-icn,
 .u-title-1 .out .icon{
   background: url('@/assets/icons/icon.png') no-repeat 0 9999px;
@@ -212,4 +230,136 @@ li {
 }
 .u-icn-29{
   background-position: -50px -320px;
+}
+.u-icn-53{
+  width: 35px;
+  height: 15px;
+  background-position: -31px -658px;
+}
+.u-icn-81{
+  width: 13px;
+  height: 13px;
+  background-position: 0 -700px;
+  &:hover{
+    background-position: -22px -700px;
+  }
+}
+// 第二个大icon
+.u-icn2{
+  background: url('@/assets/icons/icon2.png') no-repeat 0 9999px;
+}
+.u-icn2-jp3{
+  width: 40px;
+  height: 40px;
+  background-position: -135px -220px;
+}
+// 轮播图下载客户端icon
+.n-ban .download, .n-ban .download .btn{
+  background: url('@/assets/icons/download.png') no-repeat 0 0;
+}
+// 轮播图的左右耳朵、下载阴影、小圆点的icon
+.n-ban .shadow, .n-ban .shadowr, .n-ban .ban .btnl, .n-ban .ban .btnr, .n-ban .dots .pg{
+  background: url('@/assets/icons/download_shadow.png') no-repeat 0 9999px;
+}
+// 一些小icon
+.s-bg, .v-hd2, .n-disk li{
+  background: url('@/assets/icons/index.png') no-repeat 0 9999px;
+}
+.s-bg-1{
+  background-position: 0 0;
+}
+.s-bg-2{
+  background-position: 0 -195px;
+  &:hover{
+    background-position: -110px -195px;
+  }
+}
+.s-bg-6{
+  background-position: 0 -240px;
+}
+.s-bg-7{
+  background-position: -260px -75px;
+  &:hover{
+    background-position: -280px -75px;
+  }
+}
+.s-bg-8{
+  background-position: -300px -75px;
+  &:hover{
+    background-position: -320px -75px;
+  }
+}
+.s-bg-9{
+  background-position: -267px -205px;
+  &:hover{
+    background-position: -267px -235px;
+  }
+}
+.s-bg-10{
+  background-position: -300px -205px;
+  &:hover{
+    background-position: -300px -235px;
+  }
+}
+.s-bg-11{
+  background-position: -267px -268px;
+  &:hover{
+    background-position: -267px -288px;
+  }
+}
+.s-bg-12{
+  background-position: -297px -268px;
+  &:hover{
+    background-position: -297px -288px;
+  }
+}
+// 所有的遮罩层
+.u-cover .bottom, .u-cover .msk, .n-musicsd .lst .avatar .msk{
+  background: url('@/assets/icons/coverall.png') no-repeat 0 9999px;
+}
+.u-cover .msk{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.u-cover{
+  position: relative;
+  display: block;
+}
+.u-cover-4{
+  width: 80px;
+  height: 80px;
+}
+.u-cover-4 .msk{
+  background-position: -145px -57px;
+}
+// 各种播放按钮图标
+.u-cover .ply, .u-cover .icon-headset, .u-cover .icon-play, .u-face .msk, .n-note .head .msk, .icn-vip, .icn-daren, .u-checkbox{
+  background: url('@/assets/icons/iconall.png') no-repeat;
+}
+.u-cover .icon-headset, .u-cover .icon-play{
+  display: inline-block;
+}
+.u-cover .icon-play{
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  width: 16px;
+  height: 17px;
+  background-position: 0 0;
+}
+.u-cover-0 .icon-play, .u-cover-alb1 .icon-play, .u-cover-10 .icon-play, .u-cover-11 .icon-play, .u-cover-12 .icon-play{
+  left: 72px;
+  width: 22px;
+  height: 22px;
+  background-position: 0 -85px;
+}
+.u-cover-alb1 .icon-play, .u-cover-alb2 .icon-play, .u-cover-alb3 .icon-play{
+  display: none;
+}
+// 首页榜单
+.n-bilst{
+  background: url('@/assets/icons/index_bill.png') no-repeat;
 }
