@@ -11,7 +11,7 @@
       <dl :class="'blk ' + (index === topList.length -1 ? 'blk-1' : '')" v-for="(item,index) in topList">
         <dt class="top">
           <div class="cver u-cover u-cover-4">
-            <img :src="item.coverImgUrl" alt="" />
+            <img :src="item.coverImgUrl + '?param=100y100'" alt="" />
             <router-link :to="`/found/toplist?id=${item.id}`" class="msk" :title="item.name"></router-link>
           </div>
           <div class="tit">

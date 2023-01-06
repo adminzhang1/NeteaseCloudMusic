@@ -10,13 +10,12 @@ const routes = [
   },
   {
     path: '/found',
-    name: 'found',
     component: () => import("@/views/Found"),
     children: [
-      // {
-      //   path: '',
-      //   redirect: '/found/discover',
-      // },
+      {
+        path: '',
+        redirect: '/found/discover',
+      },
       {
         path: 'discover',
         name: 'discover',

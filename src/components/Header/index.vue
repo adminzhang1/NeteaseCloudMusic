@@ -13,17 +13,43 @@
               <router-link :to="item.path" v-if="!item.target" hidefocus="true" :class="selectNav.indexOf(item.path) !== -1 ?  'z-slt' : ''">
                 <em>{{ item.title }}</em>
                 <sub class="cor"></sub>
+                <i class="dot" v-if="item.path === '/friend'"></i>
               </router-link>
               <a :href="item.path" target="_blank" hidefocus="true" v-else>
                 <em>{{ item.title }}</em>
               </a>
             </span>
+            <sup class="hot" v-if="item.path === '/download'"></sup>
           </li>
         </ul>
         <!-- 登陆按钮 -->
-        <div class="m-tophead">
-          <a href="javascript:;" hidefocus="true" class="link s-fc3">登陆</a>
-          <!-- 登陆后的头像区域(未写) -->
+        <div class="m-tophead pr">
+          <a href="javascript:;" hidefocus="true" class="link s-fc3" @click="open" v-if="!isLogin">登陆</a>
+          <!-- 登陆后的头像区域 -->
+          <div class="head fl pr" v-if="isLogin">
+            <img :src="detail.profile.avatarUrl + '?param=30y30'" alt="" />
+            <i class="m-topmsg pa">{{ MsgNumber }}</i>
+          </div>
+          <div class="m-tlist" v-if="isLogin">
+            <i class="arr"></i>
+            <ul v-for="item in userNav" :key="item.class" :class="'clearfix ' + item.class">
+              <li v-for="arr in item.children" :key="arr.href">
+                <router-link :to="arr.needId ? (arr.href + `?id=${detail.profile.userId}`) : arr.href" v-if="!arr.newPage && !arr.exit">
+                  <i :class="'icn ' + arr.class"></i>
+                  <em>{{ arr.title }}</em>
+                  <span v-if="arr.msg && MsgNumber !== 0" class="m-topmsg pa">{{ MsgNumber }}</span>
+                </router-link>
+                <a :href="arr.href" target="_blank" v-if="arr.newPage">
+                  <i :class="'icn ' + arr.class"></i>
+                  <em>{{ arr.title }}</em>
+                </a>
+                <a :href="arr.href" v-if="arr.exit" @click="LogOut">
+                  <i :class="'icn ' + arr.class"></i>
+                  <em>{{ arr.title }}</em>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
         <!-- 创作者中心 -->
         <a href="javascript:;" hidefocus="true" target="_blank" class="m-topvd pr">创作者中心</a>
@@ -45,16 +71,21 @@
         </ul>
       </div>
     </div>
-    <!-- <router-link to="/download">123</router-link> -->
+    <!-- <router-link to="/download">{{ MsgNumber }}</router-link> -->
   </div>
 </template>
 
 <script>
 import Search from '@/components/TopSearch'
+import { mapState, mapMutations } from 'vuex'
+import { getMsgPrivate } from '@/api/disvocer'
 export default {
   name: 'Header',
   components: {
     Search
+  },
+  computed: {
+    ...mapState('user', ['isLogin','detail','cookie']),
   },
   data() {
     return {
@@ -89,7 +120,7 @@ export default {
           title: '下载客户端',
           target: false,
         },
-      ],
+      ], // 一级导航
       selectNav: this.$route.fullPath,
       navList: [
         {
@@ -116,8 +147,87 @@ export default {
           path: '/found/album',
           title: '新碟上架',
         },
-      ]
+      ], // 二级导航
+      MsgNumber: 0, // 私信数量
+      userNav: [
+        {
+          class: 'lb',
+          children: [
+            {
+              href: '/user/home',
+              class: 'icn-hm',
+              title: '我的主页',
+              needId: true,
+            },
+            {
+              href: '/msg/private',
+              class: 'icn-msg',
+              title: '我的消息',
+              msg: true,
+            },
+            {
+              href: '/user/level',
+              class: 'icn-lv',
+              title: '我的等级',
+            },
+            {
+              href: '/meber',
+              class: 'icn-mbr',
+              title: 'VIP会员',
+            },
+          ],
+        },
+        {
+          class: 'ltb',
+          children: [
+            {
+              href: '/user/update',
+              class: 'icn-st',
+              title: '个人设置',
+            },
+            {
+              href: 'https://music.163.com/login?targetUrl=%2Fst/userbasic/#/nameverify',
+              class: 'icn-verify',
+              title: '实名认证',
+              newPage: true,
+            },
+          ],
+        },
+        {
+          class: 'lt',
+          children: [
+            {
+              href: 'javascript:;',
+              class: 'icn-ex',
+              title: '退出',
+              exit: true,
+            },
+          ],
+        },
+      ], // 用户下拉框
     }
+  },
+  methods: {
+    ...mapMutations('login', ['open']),
+    ...mapMutations('user', ['LogOut']),
+    // 私信数量
+    async privateMsgNumber(){
+      if(this.isLogin){
+        try{
+          let msg = await getMsgPrivate(this.cookie)
+          if(msg.code === 200){
+            this.MsgNumber = msg.newMsgCount
+          }else{
+            throw '用户私信数量获取失败'
+          }
+        }catch(e){
+          throw e
+        }
+      }
+    }
+  },
+  created(){
+    this.privateMsgNumber()
   },
   watch: {
     '$route.fullPath': {
@@ -189,6 +299,25 @@ export default {
         .cor{
           display: none;
         }
+        .hot{
+          display: block;
+          position: absolute;
+          top: 21px;
+          left: 100px;
+          width: 28px;
+          height: 19px;
+          background-position: -190px 0;
+        }
+        .dot{
+          display: block;
+          position: absolute;
+          top: 24px;
+          left: 54px;
+          width: 6px;
+          height: 6px;
+          border-radius: 6px;
+          background: #c20c0c;
+        }
       }
       .m-tophead{
         float: right;
@@ -197,6 +326,14 @@ export default {
         padding: 0 22px 0 0;
         background-position: right -47px;
         background-image: none;
+        &:hover{
+          .head .m-topmsg{
+            display: none;
+          }
+          .m-tlist{
+            display: block;
+          }
+        }
         .link{
           display: block;
           width: 28px;
@@ -204,6 +341,100 @@ export default {
           color: #787878;
           &:hover{
             text-decoration: underline;
+          }
+        }
+        .head{
+          margin-top: 1px;
+          width: 30px;
+          height: 30px;
+          img{
+            width: 30px;
+            height: 30px;
+            border-radius: 30px;
+          }
+          .m-topmsg{
+            top: -5px;
+            left: 20px;
+          }
+        }
+        .m-tlist{
+          display: none;
+          position: absolute;
+          top: 38px;
+          right: -43px;
+          width: 158px;
+          background: #2b2b2b;
+          border: 1px solid #202020;
+          box-shadow: 0 8px 24px 0 rgb(0 0 0 / 50%);
+          border-radius: 4px;
+          .ltb{
+            border: 1px solid #232323;
+            border-width: 1px 0;
+          }
+          .arr{
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            width: 14px;
+            height: 8px;
+            background-position: -20px 0;
+            margin-left: -8px;
+          }
+          li,li a{
+            float: left;
+            box-sizing: border-box;
+            width: 100%;
+          }
+          li{
+            a{
+              position: relative;
+              height: 34px;
+              line-height: 34px;
+              overflow: hidden;
+              padding-left: 24px;
+              color: #ccc;
+              &:hover{
+                background: #353535;
+                text-decoration: none;
+                color: #fff;
+              }
+            }
+          }
+          em{
+            float: left;
+            width: 100px;
+          }
+          .m-topmsg{
+            top: 7px;
+            left: 110px;
+          }
+          .icn{
+            float: left;
+            width: 18px;
+            height: 18px;
+            margin: 7px 10px 0 0;
+          }
+          .icn-hm{
+            background-position: 0 -80px;
+          }
+          .icn-msg{
+            background-position: -20px -120px;
+          }
+          .icn-lv{
+            background-position: 0 -100px;
+          }
+          .icn-mbr{
+            background-position: 0 -221px;
+            margin-top: 9px;
+          }
+          .icn-st{
+            background-position: 0 -140px;
+          }
+          .icn-verify{
+            background-position: -20px -142px;
+          }
+          .icn-ex{
+            background-position: 0 -200px;
           }
         }
       }

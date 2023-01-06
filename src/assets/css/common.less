@@ -86,6 +86,7 @@ li {
   list-style: none;
 }
 #app{
+  position: relative;
   width: 100%;
   height: 100%;
   // user-select: none;
@@ -133,6 +134,14 @@ li {
   line-height: 0;
   clear: both;
 }
+.ellipsis-2 {
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
 .f-hide{
   display: none!important;
 }
@@ -141,6 +150,11 @@ li {
   text-overflow: ellipsis;
   white-space: nowrap;
   word-wrap: normal;
+}
+.f-brk{
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
 }
 // 版心和背景
 .g-bd, .g-bd1, .g-bd2, .g-bd3, .g-bd4, .g-bd5, .g-bd6, .g-bd7{
@@ -184,6 +198,9 @@ li {
 .s-fc3{
   color: #666;
 }
+.s-fc4{
+  color: #999;
+}
 .s-fc7{
   color: #0c73c2;
 }
@@ -203,6 +220,9 @@ li {
 .m-tophead,
 .m-topvd,
 .m-srch .srchbg{
+  background: url('@/assets/icons/topbar.png') no-repeat 0 9999px;
+}
+.m-top .logo, .m-nav .cor, .m-nav .hot, .m-srch .srchbg, .m-mail, .m-tophead, .m-topvd{
   background: url('@/assets/icons/topbar.png') no-repeat 0 9999px;
 }
 // .u-icn、.u-icn2、.u-icn3的相同样式
@@ -253,6 +273,14 @@ li {
   height: 40px;
   background-position: -135px -220px;
 }
+.u-icn-lv{
+  background-position: -130px -64px;
+}
+.u-icn-lvright{
+  width: 8px;
+  height: 17px;
+  background-position: -192px -64px;
+}
 // 轮播图下载客户端icon
 .n-ban .download, .n-ban .download .btn{
   background: url('@/assets/icons/download.png') no-repeat 0 0;
@@ -273,6 +301,9 @@ li {
   &:hover{
     background-position: -110px -195px;
   }
+}
+.s-bg-5{
+  background-position: 0 -270px;
 }
 .s-bg-6{
   background-position: 0 -240px;
@@ -311,6 +342,14 @@ li {
   background-position: -297px -268px;
   &:hover{
     background-position: -297px -288px;
+  }
+}
+.s-bg-13{
+  background-position: 0 -130px;
+  color: #666;
+  &:hover{
+    background-position: -70px -130px;
+    color: #333;
   }
 }
 // 所有的遮罩层
@@ -362,4 +401,61 @@ li {
 // 首页榜单
 .n-bilst{
   background: url('@/assets/icons/index_bill.png') no-repeat;
+}
+// 各类按钮的背景
+.u-btn2, .u-btn2 i, .u-btn2 .icn, .u-btni, .u-btni i, .u-tag, .u-tag i, .u-btni-addply .ply{
+  background: url('@/assets/icons/button2.png') no-repeat 0 9999px;
+}
+.u-btn2{
+  padding: 0 5px 0 0;
+  white-space: nowrap;
+  i{
+    padding: 0 15px 0 20px;
+  }
+}
+.u-btn2, .u-btn2 i{
+  display: inline-block;
+  height: 31px;
+  line-height: 31px;
+  overflow: hidden;
+  vertical-align: top;
+  text-align: center;
+  cursor: pointer;
+}
+.u-btn2-2{
+  color: #fff;
+  background-position: right -428px;
+  &:hover{
+    background-position: right -510px;
+    i{
+      background-position: 0 -469px;
+    }
+  }
+  i{
+    background-position: 0 -387px;
+  }
+}
+// 个性化推荐的日历
+.u-date, .u-date .mask{
+  background: url('@/assets/icons/date.png') no-repeat 0 9999px;
+}
+// 首页用户登陆后的下拉列表icon
+.m-tlist .icn, .m-tlist .arr{
+  background: url('@/assets/icons/toplist.png') no-repeat 0 9999px;
+}
+// 首页私信数量样式
+.m-topmsg{
+  display: inline-block;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  background: #c20c0c;
+  border-radius: 18px;
+  border: 1px solid #242424;
+  line-height: 16px;
+  font-size: 12px;
+  white-space: nowrap;
+  color: #fff;
+  text-align: center;
 }

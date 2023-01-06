@@ -17,7 +17,7 @@
           }" class="clearfix">
             <li v-for="arr in item" :key="arr.id">
               <div class="u-cover u-cover-alb1">
-                <img :src="arr.picUrl" alt="" />
+                <img :src="arr.picUrl + '?param=100y100'" alt="" />
                 <router-link :to="`/found/album?id=${arr.id}`" :title="arr.name" class="msk"></router-link>
                 <a href="javascript:;" class="icon-play tr" title="播放"></a>
               </div>

@@ -10,16 +10,15 @@
         <div class="ban-img">
           <!-- 歌单 -->
           <router-link hidefocus="true" :to="`/found/playlist?id=${banners[showBannerIndex]?.targetId}`" v-if="banners[showBannerIndex]?.targetType === 1000">
-            <img :src="banners[showBannerIndex]?.imageUrl" alt="" />
-            <!-- <img :src="banners.length !== 0 ? '' : banners[showBannerIndex].imageUrl" alt="" /> -->
+            <img :src="banners[showBannerIndex]?.imageUrl + '?imageView&quality=89'" alt="" />
           </router-link>
           <!-- 单曲 -->
           <router-link hidefocus="true" :to="`/found/song?id=${banners[showBannerIndex]?.targetId}`" v-else-if="banners[showBannerIndex]?.targetType === 1">
-            <img :src="banners[showBannerIndex]?.imageUrl" alt="" />
+            <img :src="banners[showBannerIndex]?.imageUrl + '?imageView&quality=89'" alt="" />
           </router-link>
           <!-- 数字专辑 -->
           <a :href="banners[showBannerIndex]?.url" hidefocus="true" target="_blank" v-else>
-            <img :src="banners[showBannerIndex]?.imageUrl" alt="" />
+            <img :src="banners[showBannerIndex]?.imageUrl + '?imageView&quality=89'" alt="" />
           </a>
         </div>
         <!-- 上一张、下一张 -->

@@ -44,4 +44,18 @@ export const getDetail = (id,timestamp = new Date().getTime()) => {
     }
   })
 }
-// /toplist/detail
+// 个性化推荐
+export const getRecommendResource = (cookie,timestamp = new Date().getTime()) => {
+  return http.post(`/recommend/resource?timestamp=${timestamp}`,{
+    cookie
+  })
+}
+// 获取用户私信
+export const getMsgPrivate = (cookie,limit = 20,timestamp = new Date().getTime()) => {
+  return http.post(`/msg/private?timestamp=${timestamp}`,{
+    limit,
+    cookie
+  })
+}
+// 云贝签到
+// 云贝签到信息
