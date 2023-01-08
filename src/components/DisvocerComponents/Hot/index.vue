@@ -25,7 +25,7 @@
         <div class="u-cover">
           <img :src="item.picUrl + '?param=140y140'" alt="" />
           <i class="u-jp u-icn2 u-icn2-jp3" v-if="item.type === 0 && item.highQuality"></i>
-          <router-link :to="item.type ? `/found/playlist?id=${item.id}` : `/found/dj?id=${item.id}`" :title="item.name" class="msk"></router-link>
+          <router-link :to="item.type ? `/found/dj?id=${item.id}` : `/found/playlist?id=${item.id}`" :title="item.name" class="msk"></router-link>
           <div class="bottom">
             <a href="javascript:;" title="播放" class="icon-play fr"></a>
             <span class="icon-headset"></span>

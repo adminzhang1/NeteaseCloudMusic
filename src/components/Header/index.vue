@@ -64,7 +64,7 @@
       <div class="wrap pr">
         <ul class="nav">
           <li v-for="item in navList" :key="item.path">
-            <router-link :to="item.path" :class="selectNav === item.path ? 'z-slt' : ''">
+            <router-link :to="item.path" :class="selectNav.indexOf(item.path) !== -1 ? 'z-slt' : ''">
               <em>{{ item.title }}</em>
             </router-link>
           </li>

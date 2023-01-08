@@ -18,7 +18,7 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import LoginQR from '@/components/LoginQR'
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   components: {
     Header,Footer,LoginQR
@@ -30,11 +30,24 @@ export default {
     return {}
   },
   methods: {
+    ...mapActions('toplist',['getFirstToplistId']),
     // 返回顶部
     goTop(){
       window.scrollTo(0,0)
     }
   },
+  created(){
+    this.getFirstToplistId()
+  },
+  watch: {
+    '$route.fullPath': {
+      handler(newVal){
+        if(newVal === '/found/toplist'){
+          this.getFirstToplistId()
+        }
+      }
+    }
+  }
 }
 </script>
 
