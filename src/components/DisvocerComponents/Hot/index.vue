@@ -25,7 +25,7 @@
         <div class="u-cover">
           <img :src="item.picUrl + '?param=140y140'" alt="" />
           <i class="u-jp u-icn2 u-icn2-jp3" v-if="item.type === 0 && item.highQuality"></i>
-          <router-link :to="item.type ? `/found/dj?id=${item.id}` : `/found/playlist?id=${item.id}`" :title="item.name" class="msk"></router-link>
+          <router-link :to="item.type ? `/dj?id=${item.id}` : `/playlist?id=${item.id}`" :title="item.name" class="msk"></router-link>
           <div class="bottom">
             <a href="javascript:;" title="播放" class="icon-play fr"></a>
             <span class="icon-headset"></span>
@@ -34,8 +34,8 @@
           </div>
         </div>
         <p class="dec">
-          <router-link :to="`/found/playlist?id=${item.id}`" :title="item.name" class="tit s-fc0" v-if="item.type === 0">{{ item.name }}</router-link>
-          <router-link :to="`/found/dj?id=${item.id}`" :title="item.name" class="tit s-fc0" v-if="item.type === 1">
+          <router-link :to="`/playlist?id=${item.id}`" :title="item.name" class="tit s-fc0" v-if="item.type === 0">{{ item.name }}</router-link>
+          <router-link :to="`/dj?id=${item.id}`" :title="item.name" class="tit s-fc0" v-if="item.type === 1">
             <i class="u-icn u-icn-53"></i>
             {{ item.name }}
           </router-link>

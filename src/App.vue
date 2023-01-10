@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :style="{overflowY: isShow ? 'hidden' : 'visible'}">
+  <div id="app" :style="{overflowY: isShow ? 'hidden' : 'visible'}"  @click="handleClick_ChlirenCompontent">
     <Header />
     <router-view />
     <Footer />
@@ -31,6 +31,13 @@ export default {
   },
   methods: {
     ...mapActions('toplist',['getFirstToplistId']),
+    handleClick_ChlirenCompontent(e){
+      if(e.target.id !== 'cateToggleLink'){
+        this.$bus.$emit('setCatShow',false)
+      }else{
+        this.$bus.$emit('setCatShow')
+      }
+    },
     // 返回顶部
     goTop(){
       window.scrollTo(0,0)
@@ -122,6 +129,94 @@ export default {
           cursor: pointer;
           background: url('@/assets/icons/mrc-modal-icon.png') no-repeat;
           background-position: 0 -95px;
+        }
+      }
+    }
+  }
+}
+/deep/ .n-rcmd{
+  .m-cvrlst{
+    margin-top: 20px;
+    li{
+      float: left;
+      display: block;
+      width: 140px;
+      height: 204px;
+      padding: 0 0 30px 42px;
+      overflow: hidden;
+      line-height: 1.4;
+      p{
+        width: 100%;
+      }
+    }
+    li.clearPaddLeft{
+      padding-left: 0;
+    }
+    .u-cover{
+      position: relative;
+      display: block;
+      width: 140px;
+      height: 140px;
+      img{
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .msk{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-position: 0 0;
+      }
+      .bottom{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 27px;
+        background-position: 0 -537px;
+        color: #ccc;
+        .icon-play:hover{
+          background-position: 0 -60px;
+        }
+        .icon-headset{
+          float: left;
+          width: 14px;
+          height: 11px;
+          background-position: 0 -24px;
+          margin: 9px 5px 9px 10px;
+        }
+        .nb{
+          float: left;
+          margin: 7px 0 0 0;
+        }
+      }
+      .u-jp{
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+    .dec{
+      margin: 8px 0 3px;
+      font-size: 14px;
+      a:hover{
+        text-decoration: underline;
+      }
+      .tit{
+        display: inline-block;
+        max-width: 100%;
+        vertical-align: middle;
+        i{
+          position: relative;
+          top: -1px;
+          margin-right: 3px;
+          vertical-align: middle;
+        }
+        .u-icn{
+          margin-top: -1px;
         }
       }
     }

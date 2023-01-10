@@ -18,14 +18,14 @@
             <li v-for="arr in item" :key="arr.id">
               <div class="u-cover u-cover-alb1">
                 <img :src="arr.picUrl + '?param=100y100'" alt="" />
-                <router-link :to="`/found/album?id=${arr.id}`" :title="arr.name" class="msk"></router-link>
+                <router-link :to="`/album?id=${arr.id}`" :title="arr.name" class="msk"></router-link>
                 <a href="javascript:;" class="icon-play tr" title="播放"></a>
               </div>
               <p class="f-thide">
-                <router-link :to="`/found/album?id=${arr.id}`" :title="arr.name" class="s-fc0 tit">{{ arr.name }}</router-link>
+                <router-link :to="`/album?id=${arr.id}`" :title="arr.name" class="s-fc0 tit">{{ arr.name }}</router-link>
               </p>
               <p class="tit f-thide">
-                <router-link :to="`/found/artist?id=${arr.artist.id}`" :title="arr.artist.name" class="s-fc3">{{ arr.artist.name }}</router-link>
+                <router-link :to="`/artist?id=${arr.artist.id}`" :title="arr.artist.name" class="s-fc3">{{ arr.artist.name }}</router-link>
               </p>
             </li>
           </ul>

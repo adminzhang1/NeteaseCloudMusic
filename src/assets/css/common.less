@@ -156,6 +156,7 @@ li {
   word-break: break-word;
   white-space: normal;
 }
+// 
 .g-wrap{
   padding: 40px;
 }
@@ -226,6 +227,11 @@ li {
 }
 .g-bd3{
   background: url('@/assets/icons/wrap3.png') repeat-y center 0;
+}
+// 头部标题
+.u-title{
+  height: 40px;
+  border-bottom: 2px solid #c20c0c;
 }
 // 头部一级导航的相同样式
 .m-nav li, .m-nav li span, .m-nav a, .m-nav a em{
@@ -310,7 +316,26 @@ li {
 .u-title-1 .out .icon{
   background: url('@/assets/icons/icon.png') no-repeat 0 9999px;
 }
-// 搜索结果相同样式
+.u-icn-6{
+  width: 24px;
+  height: 24px;
+  background-position: 0 -60px;
+}
+.u-icn-7{
+  width: 24px;
+  height: 24px;
+  background-position: 0 -88px;
+}
+.u-icn-8{
+  width: 24px;
+  height: 24px;
+  background-position: 0 -117px;
+}
+.u-icn-9{
+  width: 24px;
+  height: 24px;
+  background-position: 0 -141px;
+}
 .u-icn-26, .u-icn-27, .u-icn-28, .u-icn-29{
   width: 14px;
   height: 15px;
@@ -325,6 +350,11 @@ li {
 .u-icn-29{
   background-position: -50px -320px;
 }
+.u-icn-38{
+  width: 8px;
+  height: 5px;
+  background-position: -70px -543px;
+}
 .u-icn-53{
   width: 35px;
   height: 15px;
@@ -334,6 +364,11 @@ li {
   width: 13px;
   height: 13px;
   background-position: -18px -682px;
+}
+.u-icn-71{
+  width: 23px;
+  height: 23px;
+  background-position: -20px -735px;
 }
 .u-icn-72, .u-icn-73, .u-icn-74{
   background-position: -74px -268px;
@@ -495,7 +530,51 @@ li {
 .n-bilst{
   background: url('@/assets/icons/index_bill.png') no-repeat;
 }
-// 各类按钮的背景
+// 各类按钮的背景1
+.u-btn, div.u-page a, div.u-page a.js-selected, div.u-page a.znxt.js-disabled, div.u-page a.zprv.js-disabled{
+  background: url('@/assets/icons/button.png') no-repeat 0 9999px;
+}
+.u-title .u-btn-hot .a1, .u-title .u-btn-new .a2, .u-title .u-btn-area .a2, .u-title .u-btn-song .a1{
+  color: #fff;
+}
+.u-btn{
+  display: inline-block;
+}
+.u-title .u-btn .a1, .u-title .u-btn .a2{
+  float: left;
+  width: 46px;
+  height: 29px;
+  line-height: 29px;
+  text-align: center;
+}
+.u-btn-hot{
+  height: 29px;
+  background-position: 0 0;
+  border-radius: 3px;
+}
+.u-btn-g{
+  width: 75px;
+  height: 26px;
+  background-position: 0 -64px;
+  text-align: center;
+  line-height: 26px;
+}
+div.u-page .zbtn, div.u-page .zpgi{
+  margin: 0 1px 0 2px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+div.u-page .zbtn{
+  width: 69px;
+  height: 24px;
+  line-height: 24px;
+  color: #333;
+  text-align: left;
+  padding: 0;
+}
+// 各类按钮的背景2
 .u-btn2, .u-btn2 i, .u-btn2 .icn, .u-btni, .u-btni i, .u-tag, .u-tag i, .u-btni-addply .ply{
   background: url('@/assets/icons/button2.png') no-repeat 0 9999px;
 }
@@ -522,6 +601,25 @@ li {
   min-width: 23px;
   cursor: pointer;
 }
+.u-btn2-1{
+  color: #333;
+  background-position: right -100px;
+  &:hover{
+    background-position: right -182px;
+    i{
+      background-position: 0 -141px;
+    }
+  }
+  &:active{
+    background-position: right -264px;
+    i{
+      background-position: 0 -223px;
+    }
+  }
+  i{
+    background-position: 0 -59px;
+  }
+}
 .u-btn2-2{
   color: #fff;
   background-position: right -428px;
@@ -529,6 +627,16 @@ li {
     background-position: right -510px;
     i{
       background-position: 0 -469px;
+    }
+  }
+  &:active{
+    color: #fff;
+    background-position: right -592px;
+    i{
+      background-position: 0 -551px;
+    }
+    .ply{
+      background-position: -56px -1622px!important;
     }
   }
   i{
@@ -551,6 +659,9 @@ li {
   background-position: 0 -1588px;
   &:hover{
     background-position: -40px -1588px;
+  }
+  &:active{
+    background-position: -80px -1588px;
   }
 }
 .u-btni-share, .u-btni-fav, .u-btni-cmmt, .u-btni-dl{
@@ -705,4 +816,11 @@ li {
       background-position: -30px -151px;
     }
   }
+}
+// 歌单的风格分类
+.n-sltlyr .hd, .n-sltlyr .bd, .n-sltlyr .ft{
+  background: url('@/assets/icons/sltlyr.png') no-repeat;
+}
+.n-sltlyr .icn, .n-mvlist .mvpic .btn, .n-artist .btn-rz, .n-artist .btnfav{
+  background: url('@/assets/icons/iconall.png') no-repeat;
 }

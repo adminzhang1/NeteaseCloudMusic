@@ -28,7 +28,7 @@
           <ol>
             <li v-for="(arr,index) in item.tracks" :key="arr.id">
               <span :class="'no ' + (index < 3 ? 'no-top' : '')">{{ index + 1 }}</span>
-              <router-link :to="`/found/song?id=${arr.id}`" :title="arr.name" class="nm s-fc0 f-thide">{{ arr.name }}</router-link>
+              <router-link :to="`/song?id=${arr.id}`" :title="arr.name" class="nm s-fc0 f-thide">{{ arr.name }}</router-link>
               <div class="oper">
                 <a hidefocus="true" href="javascript:;" class="s-bg s-bg-11" title="播放"></a>
                 <a hidefocus="true" href="javascript:;" class="u-icn u-icn-81" title="添加到播放列表"></a>
