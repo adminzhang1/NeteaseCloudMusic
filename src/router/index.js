@@ -41,6 +41,11 @@ const routes = [
         name: 'playlist',
         component: () => import("@/views/Found/Playlist"),
       },
+      {
+        path: 'album',
+        name: 'album',
+        component: () => import("@/views/Found/Album"),
+      },
     ],
   },
   {

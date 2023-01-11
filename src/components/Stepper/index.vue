@@ -27,10 +27,6 @@ export default {
       type: Number,
       required: true,
     },
-    setNewPage: {
-      type: Function,
-      required: true,
-    }
   },
   data(){
     return {

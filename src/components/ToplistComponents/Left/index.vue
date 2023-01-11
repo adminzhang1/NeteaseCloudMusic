@@ -40,12 +40,11 @@
 </template>
 
 <script>
-import { getToplist } from '@/api/toplist'
-import { mapMutations,mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'toplistLeft',
   computed: {
-    ...mapState('toplist',['defaultId','selectId'])
+    ...mapState('toplist',['selectId','toplist'])
   },
   data(){
     return {
@@ -53,38 +52,9 @@ export default {
       toplistDate2: [], // 全球媒体榜数据
     }
   },
-  methods: {
-    ...mapMutations('toplist',['setSelect','setUpdate','setFeature']),
-    // 获取歌单列表
-    async topListDate(){
-      try{
-        let res = await getToplist()
-        if(res.code === 200){
-          this.toplistDate1 = res.list.slice(0,4)
-          this.toplistDate2 = res.list.slice(4,res.list.length)
-        }else{
-          throw '获取歌单数据失败'
-        }
-      }catch(e){
-        throw e
-      }
-    },
-  },
   created(){
-    this.topListDate()
-  },
-  watch: {
-    '$route.query.id': {
-      handler(newVal){
-        if(newVal){
-          this.setSelect(parseInt(newVal))
-        }else{
-          this.setSelect(this.defaultId)
-        }
-        this.setUpdate([...this.toplistDate1,...this.toplistDate2].filter(item => item.id === (newVal ? this.selectId : this.defaultId))[0].updateFrequency)
-        this.setFeature(this.toplistDate1.some(item => item.id === (newVal ? this.selectId : this.defaultId)))
-      }
-    }
+    this.toplistDate1 = this.toplist.slice(0,4)
+    this.toplistDate2 = this.toplist.slice(4,this.toplist.length)
   }
 }
 </script>
@@ -99,6 +69,9 @@ export default {
       padding: 0 10px 12px 15px;
       font-size: 14px;
       color: #000;
+      &.scd{
+        margin-top: 20px;
+      }
     }
     ul *{
       cursor: pointer;

@@ -228,10 +228,87 @@ li {
 .g-bd3{
   background: url('@/assets/icons/wrap3.png') repeat-y center 0;
 }
+// 列表篇相同样式
+.m-cvrlst{
+  li{
+    float: left;
+    display: block;
+    width: 140px;
+    height: 188px;
+    overflow: hidden;
+    padding: 0 0 30px 50px;
+    line-height: 1.4;
+    a:hover{
+      text-decoration: underline;
+    }
+    p{
+      width: 100%;
+    }
+    .dec{
+      margin: 8px 0 3px;
+      font-size: 14px;
+    }
+    .tit{
+      display: inline-block;
+      max-width: 100%;
+      vertical-align: middle;
+    }
+    .nm{
+      display: inline-block;
+      max-width: 85%;
+      vertical-align: middle;
+    }
+  }
+  .msk{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .icon-play{
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    width: 16px;
+    height: 17px;
+    background-position: 0 0;
+  }
+}
+.u-cover-alb1 .icon-play, .u-cover-alb2 .icon-play, .u-cover-alb3 .icon-play{
+  display: none;
+}
+.u-cover-alb1:hover .icon-play, .u-cover-alb2:hover .icon-play, .u-cover-alb3:hover .icon-play{
+  display: block;
+}
 // 头部标题
 .u-title{
   height: 40px;
   border-bottom: 2px solid #c20c0c;
+  h3{
+    float: left;
+    font-size: 24px;
+    font-weight: normal;
+  }
+  .sub{
+    float: left;
+    margin: 13px 0 0 10px;
+  }
+  .more{
+    float: right;
+    margin-top: 14px;
+  }
+  .tab{
+    float: left;
+    margin: 12px 0 0 20px;
+    a:hover{
+      text-decoration: underline;
+    }
+    .line{
+      margin: 0 10px;
+      color: #c7c7c7;
+    }
+  }
 }
 // 头部一级导航的相同样式
 .m-nav li, .m-nav li span, .m-nav a, .m-nav a em{
@@ -525,6 +602,15 @@ li {
 }
 .u-cover-alb1 .icon-play, .u-cover-alb2 .icon-play, .u-cover-alb3 .icon-play{
   display: none;
+}
+.u-cover-alb2 .icon-play, .u-cover-alb3 .icon-play, .u-cover-9 .icon-play{
+  left: 94px;
+  width: 28px;
+  height: 28px;
+  background-position: 0 -140px;
+}
+.u-cover-alb2 .icon-play:hover, .u-cover-alb3 .icon-play:hover, .u-cover-9 .icon-play:hover{
+  background-position: 0 -170px;
 }
 // 首页榜单
 .n-bilst{

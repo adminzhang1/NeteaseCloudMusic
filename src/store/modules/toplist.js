@@ -3,8 +3,9 @@ import { getToplist } from '@/api/toplist'
 export default {
   namespaced: true,
   state: {
-    defaultId: 19723756,
-    selectId: 19723756,
+    defaultId: 0,
+    selectId: 0,
+    toplist: [],
     update: null,
     feature: true
   },
@@ -13,14 +14,23 @@ export default {
       try{
         let res = await getToplist()
         if(res.code === 200){
-          context.state.update = res.list[0].updateFrequency
+          context.state.toplist = res.list
           context.commit('setDefault',res.list[0].id)
+          context.commit('setUpdate',res.list[0].updateFrequency)
         }else{
           throw '获取歌单数据出错'
         }
       }catch(e){
         throw e
       }
+    },
+    getNewUpdate(context,val){
+      let newUpdate = context.state.toplist.filter(item => item.id === val)
+      context.commit('setUpdate',newUpdate[0].updateFrequency)
+    },
+    getNewFeature(context,val){
+      let NewFeature = context.state.toplist.slice(0,4).some(item => item.id === val)
+      context.commit('setFeature',NewFeature)
     }
   },
   mutations: {

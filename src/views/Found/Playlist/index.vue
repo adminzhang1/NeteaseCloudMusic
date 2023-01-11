@@ -77,7 +77,7 @@
         </li>
       </ul>
       <!-- 步进器 -->
-      <Stepper :total="this.total" :pageSize="pageSize" :page="page" @setNewPage="updateNewPage" />
+      <Stepper :total="total" :pageSize="pageSize" :page="page" @setNewPage="updateNewPage" />
     </div>
   </div>
 </template>

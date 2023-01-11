@@ -33,9 +33,12 @@
 
 <script>
 import { getQrKey,getQrCreate,QrCheck } from '@/api/login'
-import { mapMutations,mapActions } from 'vuex'
+import { mapMutations,mapActions,mapState } from 'vuex'
 export default {
   name: 'QR',
+  computed: {
+    ...mapState('user',['isLogin'])
+  },
   data(){
     return {
       key: '',
@@ -92,7 +95,6 @@ export default {
           clearInterval(this.QrTimer)
         }else if(res.code === 803){
           this.UserInfo(res.cookie)
-          // this.$router.go('/found/discover')
         }
       }catch(e){
         throw e
@@ -109,6 +111,15 @@ export default {
   },
   beforeDestroy(){
     clearInterval(this.QrTimer)
+  },
+  watch: {
+    isLogin: {
+      handler(val){
+        if(val){
+          this.$router.go(this.$route.fullPath)
+        }
+      }
+    }
   }
 }
 </script>

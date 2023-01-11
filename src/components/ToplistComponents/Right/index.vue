@@ -59,7 +59,7 @@
         </div>
       </div>
       <!-- 歌曲列表 -->
-      <div>
+      <div id="song-list-pre-cache">
         <div class="j-flag">
           <table class="m-table m-table-rank">
             <!-- 表头 -->
@@ -78,7 +78,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr :class="index % 2 === 0 ? 'even' : ''" v-for="(item,index) in ListDetail.tracks" :key="item.id">
+              <tr :class="index % 2 === 0 ? 'even' : ''" v-for="(item,index) in tracks" :key="item.id">
                 <!-- 顺序 -->
                 <td>
                   <div class="hd">
@@ -107,7 +107,7 @@
                   <div class="clearfix">
                     <div class="tt">
                       <!-- 歌曲封面 -->
-                      <router-link :to="`/found/song?id=${item.id}`" v-if="index < 3">
+                      <router-link :to="`/song?id=${item.id}`" v-if="index < 3">
                         <img :src="item.al.picUrl + '?param=50y50&quality=100'" alt="" class="rpic" />
                       </router-link>
                       <!-- 播放按钮 -->
@@ -116,7 +116,7 @@
                         <!-- 歌曲名字、后缀 -->
                         <span class="txt">
                           <!-- 名字 -->
-                          <router-link :to="`/found/song?id=${item.id}`">
+                          <router-link :to="`/song?id=${item.id}`">
                             <b :title="item.name + (item.tns ? '-' + item.tns.join('') : '')">
                               {{ item.name }}
                             </b>
@@ -144,7 +144,7 @@
                 <td>
                   <div class="text" :title="item.ar.map(i => i.name).join('/')">
                     <span :title="item.ar.map(i => i.name).join('/')">
-                      <router-link :to="`/found/artist?id=${ar.id}`" v-for="(ar,i) in item.ar" :key="ar.id" hidefocus="true">{{ ar.name + (i === item.ar.length - 1 ? '' : '/') }}</router-link>
+                      <router-link :to="`/artist?id=${ar.id}`" v-for="(ar,i) in item.ar" :key="ar.id" hidefocus="true">{{ ar.name + (i === item.ar.length - 1 ? '' : '/') }}</router-link>
                     </span>
                   </div>
                 </td>
@@ -153,13 +153,19 @@
           </table>
         </div>
       </div>
+      <!-- 下载客户端 -->
+      <div class="m-playlist-see-more" v-if="!feature">
+        <div class="text">查看更多内容，请下载客户端</div>
+        <router-link to="/download" class="button">立即下载</router-link>
+      </div>
+      <!-- 评论 -->
       <div class="n-cmt">
         <div>
           <div class="u-title">
             <h3>
               <span class="f-ff2">评论</span>
             </h3>
-            <span class="sub s-fc3">工{{ ListDetail.commentCount }}条评论</span>
+            <span class="sub s-fc3">共{{ ListDetail.commentCount }}条评论</span>
           </div>
         </div>
         评论
@@ -196,6 +202,7 @@ export default {
   data(){
     return {
       ListDetail: {}, // 榜单内部数据
+      tracks: [] // 歌曲列表
     }
   },
   methods: {
@@ -205,6 +212,11 @@ export default {
         let res = await getTopListDetail(id)
         if(res.code === 200){
           this.ListDetail = res.playlist
+          if(this.feature){
+            this.tracks = res.playlist.tracks
+          }else{
+            this.tracks = res.playlist.tracks.slice(0,10)
+          }
         }else{
           throw '获取榜单内部数据失败'
         }
@@ -353,11 +365,9 @@ export default {
       font-weight: normal;
     }
     .sub{
-      float: left;
       margin: 9px 0 0 20px;
     }
     .more{
-      float: right;
       margin-top: 5px;
     }
   }
@@ -452,6 +462,30 @@ export default {
         float: left;
         margin-top: 2px;
       }
+    }
+  }
+  .m-playlist-see-more{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 66px;
+    margin-top: 30px;
+    margin-bottom: -10px;
+    .text{
+      font-size: 13px;
+      color: #333;
+    }
+    .button{
+      width: 120px;
+      height: 30px;
+      background-image: linear-gradient(90deg,#ff5a4c 0%,#ff1d12 100%);
+      border-radius: 18px;
+      line-height: 30px;
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
     }
   }
   .n-cmt{

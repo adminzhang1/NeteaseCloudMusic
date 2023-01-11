@@ -1,5 +1,7 @@
 <template>
+  <!-- 已登陆 -->
   <div class="g-bd" v-if="isLogin">1</div>
+  <!-- 未登录 -->
   <div class="g-bd" v-else>
     <div class="n-pglg">
       <div class="pic">
@@ -23,6 +25,9 @@ export default {
   methods: {
     ...mapMutations('login',['open']),
   },
+  created(){
+    // console.log(this.$route.fullPath)
+  }
 }
 </script>
 

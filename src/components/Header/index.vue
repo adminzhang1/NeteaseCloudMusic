@@ -58,9 +58,9 @@
       </div>
     </div>
     <!-- 小红条 -->
-    <div :class="'m-subnav m-subnav-up ' + (selectNav.indexOf('/found') === -1 ? '' : 'f-hide')"></div>
+    <div :class="'m-subnav m-subnav-up ' + (['/my','/friend','/download'].some(item => selectNav.indexOf(item) !== -1) ? '' : 'f-hide')"></div>
     <!-- 二级导航 -->
-    <div :class="'m-subnav ' + (selectNav.indexOf('/found') !== -1 ? '' : 'f-hide')">
+    <div :class="'m-subnav ' + (['/my','/friend','/download'].every(item => selectNav.indexOf(item) === -1) ? '' : 'f-hide')">
       <div class="wrap pr">
         <ul class="nav">
           <li v-for="item in navList" :key="item.path">
@@ -71,7 +71,6 @@
         </ul>
       </div>
     </div>
-    <!-- <router-link to="/download">{{ MsgNumber }}</router-link> -->
   </div>
 </template>
 
