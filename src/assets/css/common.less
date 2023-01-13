@@ -156,12 +156,27 @@ li {
   word-break: break-word;
   white-space: normal;
 }
-// 
+// 内容
 .g-wrap{
   padding: 40px;
 }
+.g-wrap6{
+  padding: 47px 30px 40px 39px;
+}
+.g-wrap7{
+  padding: 20px 40px 40px 30px;
+}
 .g-wrap12{
   padding: 0 30px 40px 40px;
+}
+.g-mn4{
+  float: left;
+  width: 709px;
+}
+.g-sd4{
+  position: relative;
+  float: right;
+  width: 270px;
 }
 .n-pglg, .n-pglg .btn{
   background: url('@/assets/icons/mymusic.png') no-repeat 0 9999px;
@@ -213,6 +228,13 @@ li {
     }
   }
 }
+.u-hd3{
+  position: relative;
+  height: 23px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  color: #333;
+}
 // 版心和背景
 .g-bd, .g-bd1, .g-bd2, .g-bd3, .g-bd4, .g-bd5, .g-bd6, .g-bd7{
   width: 980px;
@@ -227,6 +249,24 @@ li {
 }
 .g-bd3{
   background: url('@/assets/icons/wrap3.png') repeat-y center 0;
+}
+.g-bd4{
+  background: url('@/assets/icons/wrap4.png') repeat-y center 0;
+}
+// logo
+.u-slg, .u-slg2, .u-slg3, .u-blg, .u-mlg, .u-mlg2, .u-errlg{
+  background: url('@/assets/icons/logo.png') no-repeat 0 9999px;
+}
+.u-slg, .u-slg2, .u-slg3, .u-blg, .u-mlg, .u-mlg2, .u-importlg, .u-errlg{
+  display: inline-block;
+  vertical-align: middle;
+}
+.u-errlg{
+  width: 270px;
+  height: 112px;
+}
+.u-errlg-404{
+  background-position: 0 -405px;
 }
 // 列表篇相同样式
 .m-cvrlst{
@@ -309,6 +349,9 @@ li {
       color: #c7c7c7;
     }
   }
+  .out{
+    margin-right: 20px;
+  }
 }
 // 头部一级导航的相同样式
 .m-nav li, .m-nav li span, .m-nav a, .m-nav a em{
@@ -368,7 +411,7 @@ li {
   font-size: 14px;
 }
 // 回到顶部
-.m-back{
+.m-back, .m-lycifo .downapp, .m-plshare .btn, .m-pubcode .code, .m-multi .bg, .m-multi .bg a:hover{
   background: url('@/assets/icons/sprite.png') no-repeat 0 9999px;
 }
 // 头部icons精灵图
@@ -412,6 +455,11 @@ li {
   width: 24px;
   height: 24px;
   background-position: 0 -141px;
+}
+.u-icn-13{
+  width: 54px;
+  height: 24px;
+  background-position: 0 -243px;
 }
 .u-icn-26, .u-icn-27, .u-icn-28, .u-icn-29{
   width: 14px;
@@ -469,14 +517,40 @@ li {
     background-position: -22px -700px;
   }
 }
+.u-icn-95{
+  width: 16px;
+  height: 16px;
+  background-position: -34px -863px;
+}
 // 第二个大icon
 .u-icn2{
   background: url('@/assets/icons/icon2.png') no-repeat 0 9999px;
+}
+.u-jp{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.u-icn2-jp1{
+  width: 72px;
+  height: 24px;
+  background-position: -110px -275px;
+  margin-right: 10px;
+}
+.u-icn2-jp2{
+  width: 50px;
+  height: 50px;
+  background-position: -80px -220px;
 }
 .u-icn2-jp3{
   width: 40px;
   height: 40px;
   background-position: -135px -220px;
+}
+.u-icn2-jp4{
+  width: 25px;
+  height: 25px;
+  background-position: -80px -275px;
 }
 .u-icn-lv{
   background-position: -130px -64px;
@@ -760,6 +834,56 @@ div.u-page .zbtn{
     padding-left: 28px;
   }
 }
+.u-btni-addply{
+  i{
+    padding: 0 7px 0 8px;
+  }
+  .ply{
+    float: left;
+    width: 20px;
+    height: 18px;
+    margin: 6px 2px 2px 0;
+    background-position: 0 -1622px;
+    overflow: hidden;
+  }
+  &:hover{
+    .ply{
+      background-position: -28px -1622px;
+    }
+  }
+}
+.u-btni-fav{
+  &:hover i{
+    background-position: 0 -1063px;
+  }
+  i{
+    background-position: 0 -977px;
+  }
+}
+.u-btni-share{
+  &:hover i{
+    background-position: 0 -1268px;
+  }
+  i{
+    background-position: 0 -1225px;
+  }
+}
+.u-btni-dl{
+  &:hover i{
+    background-position: 0 -2805px;
+  }
+  i{
+    background-position: 0 -2761px;
+  }
+}
+.u-btni-cmmt{
+  &:hover i{
+    background-position: 0 -1508px;
+  }
+  i{
+    background-position: 0 -1465px;
+  }
+}
 // 个性化推荐的日历
 .u-date, .u-date .mask{
   background: url('@/assets/icons/date.png') no-repeat 0 9999px;
@@ -840,6 +964,7 @@ div.u-page .zbtn{
     position: relative;
     display: inline-block;
     height: 20px;
+    max-width: 99%;
     margin-right: -25px;
     padding-right: 25px;
     overflow: hidden;
@@ -852,14 +977,63 @@ div.u-page .zbtn{
   .w1{
     width: 74px;
   }
+  .w2{
+    width: 111px;
+  }
+  .w3{
+    width: 14%;
+  }
+  .w4{
+    width: 20%;
+  }
   .w2-1{
     width: 91px;
   }
   .w3-1{
     width: 26%;
   }
+  .even td{
+    background-color: #f7f7f7;
+  }
+  .ply{
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    background-position: 0 -103px;
+  }
+  .ply-z-slt,.ply-z-slt:hover{
+    background-position: -20px -128px;
+  }
+  .hd{
+    .ply{
+      float: right;
+    }
+    .num{
+      width: 25px;
+      margin-left: 5px;
+      columns: #999;
+    }
+  }
+  .tt{
+    float: left;
+    width: 100%;
+  }
+  .ttc{
+    height: 18px;
+    margin-right: 20px;
+  }
   .hshow{
     display: none;
+  }
+  tr:hover{
+    .hshow{
+      display: block;
+    position: relative;
+    margin-right: -10px;
+    }
+    .u-dur{
+      display: none;
+    }
   }
   .opt{
     float: left;
@@ -902,6 +1076,10 @@ div.u-page .zbtn{
       background-position: -30px -151px;
     }
   }
+  .u-icn-81{
+    float: left;
+    margin-top: 2px;
+  }
 }
 // 歌单的风格分类
 .n-sltlyr .hd, .n-sltlyr .bd, .n-sltlyr .ft{
@@ -909,4 +1087,146 @@ div.u-page .zbtn{
 }
 .n-sltlyr .icn, .n-mvlist .mvpic .btn, .n-artist .btn-rz, .n-artist .btnfav{
   background: url('@/assets/icons/iconall.png') no-repeat;
+}
+// 歌单相同样式
+.m-info{
+  .cover{
+    float: left;
+    position: relative;
+    display: inline;
+    margin: 0 -220px 0 0;
+  }
+  img{
+    height: 13px;
+    width: 13px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  b{
+    font-weight: normal;
+    color: #666;
+  }
+  .cnt{
+    float: right;
+    width: 100%;
+  }
+  .cntc{
+    margin-left: 230px;
+  }
+  .hd{
+    position: relative;
+    margin: 0 0 12px;
+    line-height: 24px;
+    h2{
+      line-height: 24px;
+      font-size: 20px;
+      font-weight: normal;
+    }
+  }
+  .tit{
+    margin-left: 64px;
+    position: relative;
+  }
+  .tit3{
+    margin-left: 80px;
+  }
+  .user{
+    margin: 0 0 20px;
+    line-height: 35px;
+    .face,.face img{
+      float: left;
+      width: 35px;
+      height: 35px;
+    }
+    .face{
+      margin-right: 10px;
+    }
+    .name{
+      float: left;
+      a:hover{
+        text-decoration: underline;
+      }
+    }
+    .time{
+      margin-left: 15px;
+    }
+  }
+  .btns{
+    margin-bottom: 25px;
+    margin-right: -10px;
+  }
+  .tags{
+    margin: 25px 0 5px;
+    line-height: 22px;
+    b{
+      float: left;
+    }
+    .u-tag{
+      float: left;
+      margin: 0 10px 3px 0;
+      color: #777;
+    }
+  }
+  .intr{
+    margin-top: 4px;
+    line-height: 18px;
+    color: #666;
+    b{
+      display: inline-block;
+    }
+  }
+  .btns2 .u-btni,.btns .u-btni{
+    margin-right: 6px;
+    font-family: simsun,\5b8b\4f53;
+  }
+}
+.u-cover{
+  position: relative;
+  display: block;
+  img{
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .msk{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+.u-cover-dj{
+  width: 200px;
+  height: 200px;
+  .msk{
+    width: 208px;
+    height: 208px;
+    background-position: 0 -1285px;
+    top: -4px;
+    left: -4px;
+  }
+}
+.u-tag, .u-tag i{
+  float: left;
+  height: 22px;
+  line-height: 22px;
+}
+.u-tag{
+  padding: 0 10px 0 0;
+  text-shadow: 0 1px #fdfdfd;
+  background-position: right -27px;
+  columns: #777;
+  &:hover{
+    background-position: right -1430px;
+    i{
+      background-position: 0 -1400px;
+    }
+  }
+  i{
+    position: relative;
+    zoom: 1;
+    padding: 0 3px 0 13px;
+    background-position: 0 0;
+  }
 }

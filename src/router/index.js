@@ -60,10 +60,28 @@ const routes = [
     path: '/download',
     component: () => import("@/views/Download"),
   },
+  {
+    path: '/playlist',
+    component: () => import('@/views/Playlist'),
+  },
+  {
+    path: '/notpage',
+    component: () => import('@/views/Notpage'),
+  }
 ]
 
 const router = new VueRouter({
   routes
 })
-
+router.beforeEach((to,from,next) => {
+  let arr = ['/playlist']
+  if(arr.some(item => to.path === item)){
+    if(!to.query.id){
+      next('/notpage')
+    }else{
+      next()
+    }
+  }
+  next()
+})
 export default router

@@ -55,6 +55,15 @@ export default {
   created(){
     this.toplistDate1 = this.toplist.slice(0,4)
     this.toplistDate2 = this.toplist.slice(4,this.toplist.length)
+  },
+  watch: {
+    toplist: {
+      deep: true,
+      handler(val){
+        this.toplistDate1 = val.slice(0,4)
+      this.toplistDate2 = val.slice(4,this.toplist.length)
+      }
+    }
   }
 }
 </script>

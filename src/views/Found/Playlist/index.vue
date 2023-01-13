@@ -188,6 +188,7 @@ export default {
   },
   watch: {
     '$route.query': {
+      immediate: true,
       deep: true,
       handler(newVal){
         this.order = newVal.order === 'hot' ? 'hot' : ''

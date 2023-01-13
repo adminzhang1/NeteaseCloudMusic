@@ -154,10 +154,7 @@
         </div>
       </div>
       <!-- 下载客户端 -->
-      <div class="m-playlist-see-more" v-if="!feature">
-        <div class="text">查看更多内容，请下载客户端</div>
-        <router-link to="/download" class="button">立即下载</router-link>
-      </div>
+      <Dowclient v-if="!feature" />
       <!-- 评论 -->
       <div class="n-cmt">
         <div>
@@ -175,10 +172,14 @@
 </template>
 
 <script>
+import Dowclient from '@/components/Downloadclient'
 import { getTopListDetail } from '@/api/toplist'
 import { mapState } from 'vuex'
 export default {
   name: 'toplistRight',
+  components: {
+    Dowclient,
+  },
   computed: {
     ...mapState('toplist',['defaultId','selectId','update','feature'])
   },
@@ -462,30 +463,6 @@ export default {
         float: left;
         margin-top: 2px;
       }
-    }
-  }
-  .m-playlist-see-more{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 66px;
-    margin-top: 30px;
-    margin-bottom: -10px;
-    .text{
-      font-size: 13px;
-      color: #333;
-    }
-    .button{
-      width: 120px;
-      height: 30px;
-      background-image: linear-gradient(90deg,#ff5a4c 0%,#ff1d12 100%);
-      border-radius: 18px;
-      line-height: 30px;
-      font-size: 12px;
-      color: #fff;
-      text-align: center;
     }
   }
   .n-cmt{

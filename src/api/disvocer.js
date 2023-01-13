@@ -8,7 +8,7 @@ export const getHotPalylist = (limit = 5,timestamp = new Date().getTime()) => {
   return http.get('/personalized', {
     params: {
       limit,
-      // timestamp
+      timestamp
     }
   })
 }

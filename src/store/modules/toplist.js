@@ -3,8 +3,8 @@ import { getToplist } from '@/api/toplist'
 export default {
   namespaced: true,
   state: {
-    defaultId: 0,
-    selectId: 0,
+    defaultId: 19723756,
+    selectId: 19723756,
     toplist: [],
     update: null,
     feature: true
@@ -26,7 +26,7 @@ export default {
     },
     getNewUpdate(context,val){
       let newUpdate = context.state.toplist.filter(item => item.id === val)
-      context.commit('setUpdate',newUpdate[0].updateFrequency)
+      context.commit('setUpdate',newUpdate[0]?.updateFrequency)
     },
     getNewFeature(context,val){
       let NewFeature = context.state.toplist.slice(0,4).some(item => item.id === val)
