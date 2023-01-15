@@ -13,7 +13,7 @@
               <router-link :to="item.path" v-if="!item.target" hidefocus="true" :class="selectNav.indexOf(item.path) !== -1 ?  'z-slt' : ''">
                 <em>{{ item.title }}</em>
                 <sub class="cor"></sub>
-                <i class="dot" v-if="item.path === '/friend'"></i>
+                <!-- <i class="dot" v-if="item.path === '/friend'"></i> -->
               </router-link>
               <a :href="item.path" target="_blank" hidefocus="true" v-else>
                 <em>{{ item.title }}</em>
@@ -58,9 +58,9 @@
       </div>
     </div>
     <!-- 小红条 -->
-    <div :class="'m-subnav m-subnav-up ' + (['/my','/friend','/download'].some(item => selectNav.indexOf(item) !== -1) ? '' : 'f-hide')"></div>
+    <div :class="'m-subnav m-subnav-up ' + (['/my','/friend','/download','/user'].some(item => selectNav.indexOf(item) !== -1) ? '' : 'f-hide')"></div>
     <!-- 二级导航 -->
-    <div :class="'m-subnav ' + (['/my','/friend','/download'].every(item => selectNav.indexOf(item) === -1) ? '' : 'f-hide')">
+    <div :class="'m-subnav ' + (['/my','/friend','/download','/user'].every(item => selectNav.indexOf(item) === -1) ? '' : 'f-hide')">
       <div class="wrap pr">
         <ul class="nav">
           <li v-for="item in navList" :key="item.path">

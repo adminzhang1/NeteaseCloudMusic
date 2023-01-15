@@ -1,5 +1,5 @@
 <template>
-  <div class="g-bd" v-if="isLogin">Friend</div>
+  <router-view v-if="isLogin"></router-view>
   <div class="g-bd" v-else>
     <div class="n-pglg2">
       <div class="welc s-fc3 f-fs1">
@@ -11,21 +11,19 @@
 </template>
 
 <script>
-import { mapState,mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'Friend',
   computed: {
     ...mapState('user',['isLogin']),
   },
-  data(){
-    return {}
-  },
-  methods: {
-    ...mapMutations('login',['open']),
-  },
 }
 </script>
 
 <style lang="less" scoped>
-
+/deep/ .text{
+  a:hover{
+    text-decoration: underline;
+  }
+}
 </style>

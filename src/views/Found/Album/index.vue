@@ -169,6 +169,8 @@ export default {
     }
   }
   .u-cover-alb2{
+    width: 130px;
+    height: 130px;
     .msk{
       width: 153px;
       height: 130px;

@@ -55,6 +55,22 @@ const routes = [
   {
     path: '/friend',
     component: () => import("@/views/Friend"),
+    children: [
+      {
+        path: '',
+        redirect: '/friend/trend',
+      },
+      {
+        path: 'trend',
+        name: 'trend',
+        component: () => import("@/views/Friend/Trend"),
+      },
+      {
+        path: 'newsong',
+        name: 'newsong',
+        component: () => import("@/views/Friend/Newsong"),
+      },
+    ]
   },
   {
     path: '/download',
