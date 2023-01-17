@@ -81,23 +81,53 @@ const routes = [
     component: () => import('@/views/Playlist'),
   },
   {
+    path: '/user',
+    component: () => import('@/views/User'),
+    children: [
+      {
+        path: 'level',
+        component: () => import('@/views/User/Level'),
+      },
+      {
+        path: 'home',
+        component: () => import('@/views/User/Home'),
+      },
+    ]
+  },
+  {
+    path: '/level',
+    component: () => import('@/views/Level'),
+    children: [
+      {
+        path: 'details',
+        component: () => import('@/views/Level/Details'),
+      },
+    ]
+  },
+  {
     path: '/notpage',
     component: () => import('@/views/Notpage'),
-  }
+  },
 ]
 
 const router = new VueRouter({
   routes
 })
 router.beforeEach((to,from,next) => {
-  let arr = ['/playlist']
-  if(arr.some(item => to.path === item)){
-    if(!to.query.id){
-      next('/notpage')
+  let notPageArr = ['/user']
+  let arr = ['/playlist','/user/home']
+  if(notPageArr.some(item => to.path === item)){
+    next('/notpage')
+  }else{
+    if(arr.some(item => to.path === item)){
+      if(!to.query.id){
+        next('/notpage')
+      }else{
+        next()
+      }
     }else{
       next()
     }
   }
-  next()
 })
 export default router

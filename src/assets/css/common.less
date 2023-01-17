@@ -16,7 +16,6 @@ body{
   word-break: break-all;
   background: #f5f5f5;
 }
-ul,
 h1,
 h3,
 h4,
@@ -40,6 +39,9 @@ a{
   text-decoration: none;
   color: #333;
   outline: none;
+  &:hover{
+    text-decoration: underline;
+  }
 }
 em,
 i{
@@ -344,9 +346,6 @@ li {
 .u-cover .bottom, .u-cover .msk, .n-musicsd .lst .avatar .msk{
   background: url('@/assets/icons/coverall.png') no-repeat;
 }
-// .u-cover .ply, .u-cover .icon-headset, .u-cover .icon-play, .u-face .msk, .n-note .head .msk, .icn-vip, .icn-daren, .u-checkbox{
-//   background: url('@/assets/icons/iconall.png') no-repeat;
-// }
 .n-bilst{
   background: url('@/assets/icons/index_bill.png') no-repeat;
 }
@@ -381,6 +380,149 @@ li {
   position: relative;
   height: 193px;
   background: url('@/assets/icons/frduser.png') repeat-x 0 0;
+}
+.n-lv .h3 em, .n-lv .divnum li.z-on, .n-pow .telist li, .n-level i, .n-level-big i{
+  background: url('@/assets/icons/mylevel.png') no-repeat 0 9999px;
+}
+.m-record .ply, .m-record span.icn{
+  background: url('@/assets/icons/table.png') no-repeat 0 9999px;
+}
+// a标签的取消下划线
+.u-btn2,.u-btn2:hover{
+  text-decoration: none;
+}
+// 我的主页
+.u-btn2-1{
+  color: #333;
+  background-position: right -100px;
+  &:hover{
+    background-position: right -182px;
+    i{
+      background-position: 0 -141px;
+    }
+  }
+  &:active{
+    background-position: right -264px;
+    i{
+      background-position: 0 -223px;
+    }
+  }
+  i{
+    color: #333;
+    background-position: 0 -59px;
+  }
+}
+.vip-level{
+  width: 57px;
+  height: 36px;
+  background-size: auto 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  float: left;
+  margin-left: 10px;
+}
+.u-lev{
+  display: inline-block;
+  height: 19px;
+  overflow: hidden;
+  padding-left: 29px;
+  line-height: 21px;
+  color: #e03a24;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  i{
+    float: right;
+  }
+}
+.u-icn2-lev{
+  background-position: -135px -190px;
+}
+.u-icn2-levr{
+  width: 9px;
+  height: 19px;
+  background-position: -191px -190px;
+}
+.u-icn-01{
+  width: 20px;
+  height: 20px;
+  background-position: -41px -57px;
+}
+.u-icn-02{
+  width: 20px;
+  height: 20px;
+  background-position: -41px -27px;
+}
+.u-icn-21{
+  width: 64px;
+  height: 50px;
+  background-position: 0 -347px;
+}
+// 我的等级页面
+.n-iconpoint{
+  position: relative;
+  margin-left: 10px;
+  left: -5px;
+  top: -2px;
+  z-index: 2;
+  a:hover{
+    background-position: -20px -50px;
+  }
+  &:hover div.tip{
+    display: block;
+  }
+  div.tip{
+    position: absolute;
+    left: -33px;
+    top: 30px;
+    display: none;
+    width: 295px;
+    font-size: 12px;
+    line-height: 20px;
+    background: url('@/assets/icons/top_m.png') 0 0 repeat-y;
+    padding: 8px 19px 7px 19px;
+    z-index: 2;
+    color: #666;
+    i.t{
+      position: absolute;
+      left: 0;
+      top: -16px;
+      width: 327px;
+      height: 16px;
+      background: url('@/assets/icons/top_t.png') 0 0 no-repeat;
+    }
+    i.b{
+      position: absolute;
+      left: 0;
+      bottom: -12px;
+      width: 327px;
+      height: 12px;
+      background: url('@/assets/icons/top_b.png') 0 0 no-repeat;
+    }
+  }
+}
+.n-level{
+  position: relative;
+  zoom: 1;
+  margin-left: 25px;
+  font-family: Arial;
+  font-size: 18px;
+  font-weight: 700;
+  color: #e03a24;
+  font-style: italic;
+  i{
+    position: absolute;
+    left: -25px;
+    top: 0;
+    width: 25px;
+    height: 22px;
+    background-position: 0 -25px;
+  }
+}
+.u-icn2-5{
+  width: 18px;
+  height: 18px;
+  background-position: 0 -50px;
 }
 // 加载中
 .u-load{
