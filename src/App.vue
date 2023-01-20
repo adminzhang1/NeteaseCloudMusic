@@ -1,9 +1,9 @@
 <template>
-  <div id="app" :style="{overflowY: isShow ? 'hidden' : 'visible'}"  @click="handleClick_ChlirenCompontent">
+  <div id="app" :style="{overflowY: isShow||!footerShow ? 'hidden' : 'visible'}"  @click="handleClick_ChlirenCompontent">
     <Header />
     <router-view />
-    <Footer />
-    <a href="javascript:;" title="回到顶部" class="m-back" id="g_backtop" @click="goTop">回到顶部</a>
+    <Footer v-if="footerShow" />
+    <a href="javascript:;" title="回到顶部" class="m-back" id="g_backtop" @click="goTop" v-if="footerShow">回到顶部</a>
     <!-- 登陆窗口 -->
     <div class="mrc-modal" v-if="isShow">
       <div class="mrc-modal-mask"></div>
@@ -27,7 +27,9 @@ export default {
     ...mapState('login', ['isShow'])
   },
   data(){
-    return {}
+    return {
+      footerShow: true,
+    }
   },
   methods: {
     ...mapActions('toplist',['getFirstToplistId']),
@@ -48,9 +50,15 @@ export default {
   },
   watch: {
     '$route.fullPath': {
+      immediate: true,
       handler(newVal){
         if(newVal === '/found/toplist'){
           this.getFirstToplistId()
+        }
+        if(newVal.indexOf('/my')!==-1){
+          this.footerShow = false
+        }else{
+          this.footerShow = true
         }
       }
     }

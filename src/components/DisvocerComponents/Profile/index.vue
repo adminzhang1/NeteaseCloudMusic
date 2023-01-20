@@ -160,6 +160,7 @@ export default {
           color: #666;
           &:hover{
             color: #0c73c2;
+            text-decoration: none;
           }
         }
       }

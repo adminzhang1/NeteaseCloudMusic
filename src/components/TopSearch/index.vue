@@ -230,6 +230,7 @@ export default {
               text-indent: 12px;
               line-height: 24px;
               &:hover{
+                text-decoration: none;
                 background-color: #e3e5e7;
               }
             }

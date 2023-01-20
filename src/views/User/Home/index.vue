@@ -1,9 +1,7 @@
 <template>
   <div class="g-bd clearfix">
     <div class="g-wrap">
-      <div class="u-load s-fc4" v-if="loading">
-        <i class="icn"></i>加载中...
-      </div>
+      <Loading v-if="loading" />
       <template v-if="!loading">
         <UserProifo :id="userid" :userInfo="userinfo" />
         <div class="u-title u-title-1 m-record-title clearfix">

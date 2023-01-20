@@ -1,5 +1,5 @@
 import { getUserAccount,getUserDetail,getVipGrowthpoint } from '@/api/login'
-import { getUserSubcount,getUserPlaylist } from '@/api/user'
+import { getUserSubcount,getUserPlaylist,getMvSublist } from '@/api/user'
 // 用户模块
 export default {
   namespaced: true,
@@ -10,12 +10,11 @@ export default {
     vipDetail: {},
     userSubcount: {},
     userPlaylist: [],
-    playlistMore: null,
   },
   actions: {
     // 获取登陆用户信息
     async UserInfo(context,cookie){
-      console.log(cookie)
+      // console.log(cookie)
       try{
         cookie = process.env.VUE_APP_COOKIE
         let res = await getUserAccount(cookie)
@@ -24,11 +23,15 @@ export default {
             // 获取用户信息
             let userdetail = await getUserDetail(res.profile.userId)
             if(userdetail.code === 200){
-              console.log(userdetail)
               await context.dispatch('VipDetail',cookie)
               await context.dispatch('UserSub',cookie)
-              console.log(context.state.userSubcount)
-              await context.dispatch('UserPlaylist',{id:res.profile.userId,cookie,limit:35,offset:0})
+              let {createdPlaylistCount,subPlaylistCount} = context.state.userSubcount
+              await context.dispatch('UserPlaylist',{
+                id:res.profile.userId,
+                cookie,
+                limit:createdPlaylistCount+subPlaylistCount,
+                offset:0
+              })
               // 保存用户信息
               context.state.cookie = cookie
               context.state.detail = userdetail
@@ -62,7 +65,8 @@ export default {
     async UserSub(context,cookie){
       let sub = await getUserSubcount(cookie)
       if(sub.code === 200){
-        context.state.userSubcount = sub
+        context.state.userSubcount = {...context.state.userSubcount,...sub}
+        await context.dispatch('MvSublist',cookie)
       }else{
         throw '获取用户歌单，收藏，mv, dj数量失败'
       }
@@ -71,10 +75,18 @@ export default {
     async UserPlaylist(context,{id,cookie,limit,offset}){
       let play = await getUserPlaylist(id,cookie,limit,offset)
       if(play.code === 200){
-        context.state.userPlaylist = [...context.state.userPlaylist,...play.playlist]
-        context.state.playlistMore = play.more
+        context.state.userPlaylist = play.playlist
       }else{
         throw '获取用户所有歌单失败'
+      }
+    },
+    // 获取用户视频数量
+    async MvSublist(context,cookie){
+      let mv = await getMvSublist(cookie)
+      if(mv.code === 200){
+        context.state.userSubcount.mvCount = mv.count
+      }else{
+        throw '获取用户mv数据失败'
       }
     }
   },
@@ -89,7 +101,6 @@ export default {
       state.vipDetail = {}
       state.userSubcount = {}
       state.userPlaylist = []
-      state.playlistMore = null
       window.localStorage.removeItem('NeteaseCloudMusic')
     }
   },

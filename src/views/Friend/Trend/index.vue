@@ -55,9 +55,7 @@
               </div>
             </li>
           </ul>
-          <div class="u-load s-fc4" v-if="islast && events.length!==0">
-            <i class="icn"></i>加载中...
-          </div>
+          <Loading v-if="islast && events.length!==0" />
         </div>
       </div>
     </div>

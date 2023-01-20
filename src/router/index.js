@@ -51,6 +51,24 @@ const routes = [
   {
     path: '/my',
     component: () => import("@/views/My"),
+    children: [
+      {
+        path: 'playlist',
+        component: () => import('@/views/My/Playlist'),
+      },
+      {
+        path: 'artist',
+        component: () => import('@/views/My/Artist'),
+      },
+      {
+        path: 'radio',
+        component: () => import('@/views/My/Radio'),
+      },
+      {
+        path: 'mv',
+        component: () => import('@/views/My/Mv'),
+      },
+    ]
   },
   {
     path: '/friend',
@@ -115,7 +133,7 @@ const router = new VueRouter({
 })
 router.beforeEach((to,from,next) => {
   let notPageArr = ['/user']
-  let arr = ['/playlist','/user/home']
+  let arr = ['/playlist','/user/home','/my/playlist']
   if(notPageArr.some(item => to.path === item)){
     next('/notpage')
   }else{

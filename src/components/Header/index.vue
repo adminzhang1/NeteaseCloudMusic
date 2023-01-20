@@ -452,6 +452,7 @@ export default {
         &:hover{
           color: #fff;
           border: 1px solid #ccc;
+          text-decoration: none;
         }
       }
     }

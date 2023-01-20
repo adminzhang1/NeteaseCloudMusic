@@ -37,4 +37,28 @@ export const getUserPlaylist = (uid,cookie,limit,offset,timestamp = new Date().g
     offset,
   })
 }
-
+// 获取用户视频
+export const getMvSublist = (cookie,timestamp = new Date().getTime()) => {
+  return http.post(`/mv/sublist?timestamp=${timestamp}`,{
+    cookie
+  })
+}
+// 获取歌单信息
+export const getPlaylistDetail = (id,cookie,timestamp = new Date().getTime()) => {
+  return http.post(`/playlist/detail?timestamp=${timestamp}`,{
+    id,
+    cookie
+  })
+}
+// 获取用户关注列表
+export const getArtistSublist = (cookie,timestamp = new Date().getTime()) => {
+  return http.post(`/artist/sublist?timestamp=${timestamp}`,{
+    cookie
+  })
+}
+// 获取用户订阅电台
+export const getDjSublist = (cookie,timestamp = new Date().getTime()) => {
+  return http.post(`/dj/sublist?timestamp=${timestamp}`,{
+    cookie
+  })
+}

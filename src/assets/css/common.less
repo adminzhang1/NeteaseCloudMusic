@@ -158,6 +158,9 @@ li {
   word-break: break-word;
   white-space: normal;
 }
+.f-ib{
+  display: inline-block;
+}
 // 字体样式和颜色
 .s-fc0{
   color: #000;
@@ -192,6 +195,12 @@ li {
 .f-fs1{
   font-size: 14px;
 }
+.f-fs2{
+  font-size: 16px;
+}
+.f-fw0{
+  font-weight: normal;
+}
 // 内容
 .g-wrap{
   padding: 40px;
@@ -208,6 +217,12 @@ li {
 .g-wrap12{
   padding: 0 30px 40px 40px;
 }
+.g-mn3{
+  height: 100%;
+  float: right;
+  width: 740px;
+  padding-bottom: 50px;
+}
 .g-mn4{
   float: left;
   width: 709px;
@@ -220,6 +235,12 @@ li {
   float: left;
   width: 100%;
 }
+.g-sd3{
+  float: left;
+  width: 240px;
+  position: fixed;
+
+}
 .g-sd4{
   position: relative;
   float: right;
@@ -230,6 +251,12 @@ li {
   float: right;
   width: 296px;
   padding: 0 1px;
+}
+.g-mymusic{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: relative;
+  zoom: 1;
 }
 .n-pglg, .n-pglg .btn{
   background: url('@/assets/icons/mymusic.png') no-repeat 0 9999px;
@@ -287,6 +314,9 @@ li {
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
   color: #333;
+}
+.f-mgt40{
+  margin-top: 40px;
 }
 // 版心和背景
 .g-bd, .g-bd1, .g-bd2, .g-bd3, .g-bd4, .g-bd5, .g-bd6, .g-bd7{
@@ -387,9 +417,265 @@ li {
 .m-record .ply, .m-record span.icn{
   background: url('@/assets/icons/table.png') no-repeat 0 9999px;
 }
+.u-msk{
+  background: url('@/assets/icons/mask.png') no-repeat 0 9999px;
+}
 // a标签的取消下划线
 .u-btn2,.u-btn2:hover{
   text-decoration: none;
+}
+//---------------------
+// 歌单的功能区域按钮
+.u-btni, .u-btni i{
+  float: left;
+  height: 31px;
+  line-height: 30px;
+  min-width: 23px;
+  cursor: pointer;
+}
+.u-btni{
+  padding: 0 5px 0 0;
+  white-space: nowrap;
+  color: #333;
+  i{
+    padding: 0 7px 0 36px;
+  }
+}
+.u-btni, .u-btni:hover{
+  color: #333;
+  text-decoration: none;
+}
+.u-btn2{
+  padding: 0 5px 0 0;
+  white-space: nowrap;
+  i{
+    padding: 0 15px 0 20px;
+  }
+}
+.u-btn2, .u-btn2 i{
+  display: inline-block;
+  height: 31px;
+  line-height: 31px;
+  overflow: hidden;
+  vertical-align: top;
+  text-align: center;
+  cursor: pointer;
+}
+// 正常样式
+.m-info{
+  .btns{
+    margin-bottom: 25px;
+    margin-right: -10px;
+    .u-btni-add{
+      margin-right: 5px;
+    }
+  }
+  .btns2 .u-btni,.btns .u-btni{
+    margin-right: 6px;
+    font-family: simsun,\5b8b\4f53;
+  }
+}
+.u-btni-share, .u-btni-fav, .u-btni-cmmt, .u-btni-dl{
+  background-position: right -1020px;
+  &:hover{
+    background-position: right -1106px;
+  }
+  i{
+    padding-right: 2px;
+    padding-left: 28px;
+  }
+}
+.u-btni-share{
+  &:hover i{
+    background-position: 0 -1268px;
+  }
+  i{
+    background-position: 0 -1225px;
+  }
+}
+.u-btni-fav{
+  &:hover i{
+    background-position: 0 -1063px;
+  }
+  i{
+    background-position: 0 -977px;
+  }
+}
+.u-btni-cmmt{
+  &:hover i{
+    background-position: 0 -1508px;
+  }
+  i{
+    background-position: 0 -1465px;
+  }
+}
+.u-btni-dl{
+  &:hover i{
+    background-position: 0 -2805px;
+  }
+  i{
+    background-position: 0 -2761px;
+  }
+}
+// 正常的播放和添加
+.u-btni-addply{
+  float: left;
+  i{
+    padding: 0 7px 0 8px;
+  }
+  .ply{
+    float: left;
+    width: 20px;
+    height: 18px;
+    margin: 6px 2px 2px 0;
+    background-position: 0 -1622px;
+    overflow: hidden;
+  }
+}
+.u-btni-add{
+  width: 31px;
+  margin-left: -3px;
+  padding-right: 0;
+  background-position: 0 -1588px;
+}
+.u-btn2-2{
+  color: #fff;
+  background-position: right -428px;
+  &:hover{
+    background-position: right -510px;
+    i{
+      background-position: 0 -469px;
+    }
+    .ply{
+      background-position: -28px -1622px;
+    }
+  }
+  &:active{
+    color: #fff;
+    background-position: right -592px;
+    i{
+      background-position: 0 -551px;
+    }
+    .ply{
+      background-position: -56px -1622px!important;
+    }
+  }
+  i{
+    color: #fff;
+    background-position: 0 -387px;
+  }
+}
+// 禁用播放按钮的样式
+.u-btni-play-dis, .u-btni-play-dis:hover, .u-btni-play-dis:active{
+  color: #bebebe;
+  background-position: right -934px;
+}
+.u-btni-play-dis i, .u-btni-play-dis:hover i, .u-btni-play-dis:active i{
+  color: #bebebe;
+  background-position: 0 -891px;
+}
+.u-btni-play-dis, .u-btni-play-dis i, .u-btni-play-dis .time{
+  cursor: default;
+}
+// 禁用其他按钮的样式
+.u-btni-fav-dis, .u-btni-fav-dis:hover, .u-btni-fav-dis2, .u-btni-fav-dis2:hover, .u-btni-share-dis, .u-btni-share-dis:hover, .u-btni-cmmt-dis, .u-btni-cmmt-dis:hover, .u-btni-dl-dis, .u-btni-dl-dis:hover{
+  cursor: default;
+  background-position: right -1192px;
+}
+.u-btni-fav-dis i, .u-btni-fav-dis:hover i, .u-btni-fav-dis2 i, .u-btni-fav-dis2:hover i, .u-btni-share-dis i, .u-btni-share-dis:hover i, .u-btni-cmmt-dis i, .u-btni-cmmt-dis:hover i, .u-btni-dl-dis i, .u-btni-dl-dis:hover i{
+  color: #bebebe;
+  background-position: 0 -1149px;
+  cursor: default;
+}
+// 禁用收藏
+.u-btni-fav-dis2 i, .u-btni-fav-dis2:hover i{
+  background-position: 0 -1354px;
+}
+// 禁用分享
+.u-btni-share-dis i, .u-btni-share-dis:hover i{
+  background-position: 0 -1311px;
+}
+// 禁用下载
+.u-btni-dl-dis i, .u-btni-dl-dis:hover i{
+  background-position: 0 -3024px;
+}
+// 禁用评论
+.u-btni-cmmt-dis i, .u-btni-cmmt-dis:hover i{
+  background-position: 0 -1551px;
+}
+// 名字后跟的图标
+.u-icn-new-wrap{
+  position: relative;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin: 2px 0 0 2px;
+  vertical-align: top;
+  .u-icn-new{
+    width: 15px;
+    height: 15px;
+    margin-top: -6px;
+  }
+}
+// --------------------
+// 没有歌曲列表
+.n-nmusic{
+  padding: 105px 0 105px 0;
+  text-align: center;
+  h3{
+    padding-bottom: 38px;
+    font-size: 18px;
+  }
+  .u-icn-21{
+    margin-right: 17px;
+  }
+  .u-icn-22{
+    margin: 0 9px 0 7px;
+  }
+}
+.u-icn-21{
+  width: 64px;
+  height: 50px;
+  background-position: 0 -347px;
+}
+.u-icn-22{
+  width: 16px;
+  height: 14px;
+  background-position: 0 -400px;
+}
+// 我的音乐
+.u-btn-crt{
+  width: 52px;
+  height: 22px;
+  background-position: 0 -96px;
+  &:hover{
+    background-position: -94px -39px;
+  }
+  i{
+    display: inline-block;
+    line-height: 22px;
+    overflow: hidden;
+    padding-left: 20px;
+    color: #515151;
+    font-size: 12px;
+    font-weight: normal;
+  }
+}
+.u-icn-10{
+  width: 13px;
+  height: 13px;
+  background-position: 0 -270px;
+  &:hover{
+    background-position: -20px -270px;
+  }
+}
+.u-icn-11{
+  width: 13px;
+  height: 14px;
+  background-position: 0 -284px;
+  &:hover{
+    background-position: -20px -284px;
+  }
 }
 // 我的主页
 .u-btn2-1{
@@ -714,18 +1000,6 @@ li {
     background-position: 0 -480px;
   }
 }
-.u-icn-new-wrap{
-  position: relative;
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  margin: 2px 0 0 2px;
-  vertical-align: top;
-  .u-icn-new{
-    width: 15px;
-    height: 15px;
-  }
-}
 // 404页面
 .u-errlg{
   width: 270px;
@@ -790,7 +1064,7 @@ li {
 .u-cover-alb1:hover .icon-play, .u-cover-alb2:hover .icon-play, .u-cover-alb3:hover .icon-play{
   display: block;
 }
-// 头部标题
+// 各种列表标题
 .u-title{
   height: 40px;
   border-bottom: 2px solid #c20c0c;
@@ -820,6 +1094,19 @@ li {
   }
   .out{
     margin-right: 20px;
+  }
+}
+.u-title-1{
+  height: 33px;
+  .sub{
+    margin: 9px 0 0 20px;
+  }
+  .more{
+    margin-top: 5px;
+  }
+  h3{
+    font-size: 20px;
+    line-height: 28px;
   }
 }
 // 头部一级导航的相同样式
@@ -871,11 +1158,6 @@ li {
   width: 24px;
   height: 24px;
   background-position: 0 -141px;
-}
-.u-icn-13{
-  width: 54px;
-  height: 24px;
-  background-position: 0 -243px;
 }
 .u-icn-26, .u-icn-27, .u-icn-28, .u-icn-29{
   width: 14px;
@@ -943,17 +1225,6 @@ li {
   position: absolute;
   top: 0;
   left: 0;
-}
-.u-icn2-jp1{
-  width: 72px;
-  height: 24px;
-  background-position: -110px -275px;
-  margin-right: 10px;
-}
-.u-icn2-jp2{
-  width: 50px;
-  height: 50px;
-  background-position: -80px -220px;
 }
 .u-icn2-jp3{
   width: 40px;
@@ -1124,29 +1395,6 @@ div.u-page .zbtn{
   padding: 0;
 }
 // 各类按钮的背景2
-.u-btn2{
-  padding: 0 5px 0 0;
-  white-space: nowrap;
-  i{
-    padding: 0 15px 0 20px;
-  }
-}
-.u-btn2, .u-btn2 i{
-  display: inline-block;
-  height: 31px;
-  line-height: 31px;
-  overflow: hidden;
-  vertical-align: top;
-  text-align: center;
-  cursor: pointer;
-}
-.u-btni, .u-btni i{
-  float: left;
-  height: 31px;
-  line-height: 30px;
-  min-width: 23px;
-  cursor: pointer;
-}
 .u-btn2-1{
   color: #333;
   background-position: right -100px;
@@ -1166,123 +1414,6 @@ div.u-page .zbtn{
     background-position: 0 -59px;
   }
 }
-.u-btn2-2{
-  color: #fff;
-  background-position: right -428px;
-  &:hover{
-    background-position: right -510px;
-    i{
-      background-position: 0 -469px;
-    }
-  }
-  &:active{
-    color: #fff;
-    background-position: right -592px;
-    i{
-      background-position: 0 -551px;
-    }
-    .ply{
-      background-position: -56px -1622px!important;
-    }
-  }
-  i{
-    color: #fff;
-    background-position: 0 -387px;
-  }
-}
-.u-btni{
-  padding: 0 5px 0 0;
-  white-space: nowrap;
-  color: #333;
-  i{
-    padding: 0 7px 0 36px;
-  }
-}
-.u-btni-add{
-  width: 31px;
-  margin-left: -3px;
-  padding-right: 0;
-  background-position: 0 -1588px;
-  &:hover{
-    background-position: -40px -1588px;
-  }
-  &:active{
-    background-position: -80px -1588px;
-  }
-}
-.u-btni-share, .u-btni-fav, .u-btni-cmmt, .u-btni-dl{
-  background-position: right -1020px;
-  &:hover{
-    background-position: right -1106px;
-  }
-  i{
-    padding-right: 2px;
-    padding-left: 28px;
-  }
-}
-.u-btni-addply{
-  i{
-    padding: 0 7px 0 8px;
-  }
-  .ply{
-    float: left;
-    width: 20px;
-    height: 18px;
-    margin: 6px 2px 2px 0;
-    background-position: 0 -1622px;
-    overflow: hidden;
-  }
-  &:hover{
-    .ply{
-      background-position: -28px -1622px;
-    }
-  }
-}
-.u-btni-fav{
-  &:hover i{
-    background-position: 0 -1063px;
-  }
-  i{
-    background-position: 0 -977px;
-  }
-}
-.u-btni-share{
-  &:hover i{
-    background-position: 0 -1268px;
-  }
-  i{
-    background-position: 0 -1225px;
-  }
-}
-.u-btni-playall{
-  background-position: right -2325px;
-  &:hover{
-    background-position: right -2720px;
-    i{
-      background-position: 0 -2680px;
-    }
-  }
-  i{
-    background-position: 0 -2285px;
-    padding-left: 30px;
-  }
-}
-.u-btni-dl{
-  &:hover i{
-    background-position: 0 -2805px;
-  }
-  i{
-    background-position: 0 -2761px;
-  }
-}
-.u-btni-cmmt{
-  &:hover i{
-    background-position: 0 -1508px;
-  }
-  i{
-    background-position: 0 -1465px;
-  }
-}
 // 首页私信数量样式
 .m-topmsg{
   display: inline-block;
@@ -1299,68 +1430,26 @@ div.u-page .zbtn{
   color: #fff;
   text-align: center;
 }
-// 歌曲列表的icon
+// 歌单评论
+.m-cmmt{
+  margin: 20px 32px 0;
+}
+// 第一种歌曲列表眼视光hi
 .m-table{
   width: 100%;
   border: 1px solid #d9d9d9;
-  .mv,.icnfix{
-    position: absolute;
-    top: 0;
-    right: 0;
+  //标题
+  .af0::after{
+    content: '\6b4c \66f2 \6807 \9898';
   }
-  .mv,.icn{
-    float: left;
-    width: 18px;
-    height: 16px;
-    margin: 2px 0 0 4px;
-    overflow: hidden;
-    text-indent: -999px;
-    cursor: pointer;
+  .af1::after{
+    content: '\65f6 \957f';
   }
-  th{
-    height: 38px;
-    vertical-align: top;
-    text-align: left;
-    font-weight: normal;
-    color: #666;
-    background-color: #f7f7f7;
-    background-position: 0 0;
-    background-repeat: repeat-x;
-    .wp{
-      height: 18px;
-      line-height: 18px;
-      padding: 8px 10px;
-      background-position: 0 -56px;
-    }
+  .af2::after{
+    content: '\6b4c \624b';
   }
-  td{
-    padding: 6px 10px;
-    line-height: 18px;
-    text-align: left;
-  }
-  .ply{
-    float: left;
-    width: 17px;
-    height: 17px;
-    background-position: 0 -103px;
-    cursor: pointer;
-    &:hover{
-      background-position: 0 -128px;
-    }
-  }
-  .txt{
-    position: relative;
-    display: inline-block;
-    height: 20px;
-    max-width: 99%;
-    margin-right: -25px;
-    padding-right: 25px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  b{
-    font-weight: normal;
+  .af3::after{
+    content: '\4e13 \8f91';
   }
   .w1{
     width: 74px;
@@ -1380,17 +1469,78 @@ div.u-page .zbtn{
   .w3-1{
     width: 26%;
   }
+  // td、th、tr
+  th{
+    height: 38px;
+    vertical-align: top;
+    text-align: left;
+    font-weight: normal;
+    color: #666;
+    background-color: #f7f7f7;
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    &.first .wp{
+      background: none;
+    }
+    .wp{
+      height: 18px;
+      line-height: 18px;
+      padding: 8px 10px;
+      background-position: 0 -56px;
+    }
+  }
+  td{
+    padding: 6px 10px;
+    line-height: 18px;
+    text-align: left;
+  }
   .even td{
     background-color: #f7f7f7;
   }
+  tr:hover{
+    .hshow{
+      display: block;
+      position: relative;
+      margin-right: -10px;
+    }
+    .u-dur{
+      display: none;
+    }
+  }
+  // mv按钮
+  .mv,.icnfix{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .mv,.icn{
+    float: left;
+    width: 18px;
+    height: 16px;
+    margin: 2px 0 0 4px;
+    overflow: hidden;
+    text-indent: -999px;
+    cursor: pointer;
+  }
+  .mv{
+    width: 23px;
+    height: 17px;
+    margin: 1px 0 0 0;
+    background-position: 0 -151px;
+    &:hover{
+      background-position: -30px -151px;
+    }
+  }
+  // 序号和播放
   .ply{
+    float: left;
     width: 17px;
     height: 17px;
-    cursor: pointer;
     background-position: 0 -103px;
-  }
-  .ply-z-slt,.ply-z-slt:hover{
-    background-position: -20px -128px;
+    cursor: pointer;
+    &:hover{
+      background-position: 0 -128px;
+    }
   }
   .hd{
     .ply{
@@ -1402,6 +1552,10 @@ div.u-page .zbtn{
       columns: #999;
     }
   }
+  .ply-z-slt,.ply-z-slt:hover{
+    background-position: -20px -128px;
+  }
+  // 标题
   .tt{
     float: left;
     width: 100%;
@@ -1410,32 +1564,30 @@ div.u-page .zbtn{
     height: 18px;
     margin-right: 20px;
   }
+  .txt{
+    position: relative;
+    display: inline-block;
+    height: 20px;
+    max-width: 99%;
+    margin-right: -25px;
+    padding-right: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  b{
+    font-weight: normal;
+  }
+  // 功能按钮
   .hshow{
     display: none;
-  }
-  tr:hover{
-    .hshow{
-      display: block;
-    position: relative;
-    margin-right: -10px;
-    }
-    .u-dur{
-      display: none;
-    }
   }
   .opt{
     float: left;
   }
-  .text{
-    width: 100%;
-    position: relative;
-    zoom: 1;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    a:hover{
-      text-decoration: underline;
-    }
+  .u-icn-81{
+    float: left;
+    margin-top: 2px;
   }
   .icn-fav{
     background-position: 0 -174px;
@@ -1455,22 +1607,28 @@ div.u-page .zbtn{
       background-position: -104px -174px;
     }
   }
-  .mv{
-    width: 23px;
-    height: 17px;
-    margin: 1px 0 0 0;
-    background-position: 0 -151px;
+  .icn-del{
+    background-position: 0 -217px;
     &:hover{
-      background-position: -30px -151px;
+      background-position: -20px -217px;
     }
   }
-  .u-icn-81{
-    float: left;
-    margin-top: 2px;
+  // 歌手、专辑
+  .text{
+    width: 100%;
+    position: relative;
+    zoom: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    a:hover{
+      text-decoration: underline;
+    }
   }
 }
-// 歌单相同样式
+// 歌单头部信息样式
 .m-info{
+  // 歌单图片
   .cover{
     float: left;
     position: relative;
@@ -1483,6 +1641,7 @@ div.u-page .zbtn{
     display: inline-block;
     vertical-align: middle;
   }
+  // 歌单右侧信息
   b{
     font-weight: normal;
     color: #666;
@@ -1494,6 +1653,7 @@ div.u-page .zbtn{
   .cntc{
     margin-left: 230px;
   }
+  // 歌单名字
   .hd{
     position: relative;
     margin: 0 0 12px;
@@ -1503,6 +1663,14 @@ div.u-page .zbtn{
       font-size: 20px;
       font-weight: normal;
     }
+    .type{
+      position: relative;
+      top: 3px;
+    }
+  }
+  .type{
+    float: left;
+    margin-right: 6px;
   }
   .tit{
     margin-left: 64px;
@@ -1511,6 +1679,18 @@ div.u-page .zbtn{
   .tit3{
     margin-left: 80px;
   }
+  // 我的音乐中歌单的编辑按钮
+  .edit{
+    float: right;
+    margin-top: 1px;
+    padding-left: 18px;
+    line-height: 17px;
+    background-position: 0 -259px;
+    &:hover{
+      background-position: 0 -280px;
+    }
+  }
+  // 歌单用户、创建时间
   .user{
     margin: 0 0 20px;
     line-height: 35px;
@@ -1532,10 +1712,7 @@ div.u-page .zbtn{
       margin-left: 15px;
     }
   }
-  .btns{
-    margin-bottom: 25px;
-    margin-right: -10px;
-  }
+  // 歌单标签
   .tags{
     margin: 25px 0 5px;
     line-height: 22px;
@@ -1548,6 +1725,7 @@ div.u-page .zbtn{
       color: #777;
     }
   }
+  // 歌单介绍
   .intr{
     margin-top: 4px;
     line-height: 18px;
@@ -1555,10 +1733,6 @@ div.u-page .zbtn{
     b{
       display: inline-block;
     }
-  }
-  .btns2 .u-btni,.btns .u-btni{
-    margin-right: 6px;
-    font-family: simsun,\5b8b\4f53;
   }
 }
 .u-cover{
@@ -1577,17 +1751,7 @@ div.u-page .zbtn{
     height: 100%;
   }
 }
-.u-cover-dj{
-  width: 200px;
-  height: 200px;
-  .msk{
-    width: 208px;
-    height: 208px;
-    background-position: 0 -1285px;
-    top: -4px;
-    left: -4px;
-  }
-}
+// 歌单标签+icon图标
 .u-tag, .u-tag i{
   float: left;
   height: 22px;
@@ -1610,4 +1774,112 @@ div.u-page .zbtn{
     padding: 0 3px 0 13px;
     background-position: 0 0;
   }
+}
+.u-icn-13{
+  width: 54px;
+  height: 24px;
+  background-position: 0 -243px;
+}
+.u-icn2-jp1{
+  width: 72px;
+  height: 24px;
+  background-position: -110px -275px;
+  margin-right: 10px;
+}
+.u-icn2-jp2{
+  width: 50px;
+  height: 50px;
+  background-position: -80px -220px;
+}
+.u-cover-dj{
+  width: 200px;
+  height: 200px;
+  .msk{
+    width: 208px;
+    height: 208px;
+    background-position: 0 -1285px;
+    top: -4px;
+    left: -4px;
+  }
+}
+.u-icn-69,.u-icn-70{
+  width: 11px;
+  height: 8px;
+  background-position: -65px -520px;
+}
+.u-icn-70{
+  background-position: -45px -520px;
+}
+// 我的音乐中的我订阅的电台
+.u-cover-3{
+  width: 50px;
+  height: 50px;
+}
+.u-cover{
+  img{
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+.u-bub{
+  display: block;
+  position: relative;
+  zoom: 1;
+  width: 22px;
+  height: 22px;
+  color: #fff;
+  text-align: center;
+  line-height: 23px;
+  font-weight: bold;
+  b{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    background: url('@/assets/icons//bub.png') no-repeat;
+  }
+  em{
+    float: none;
+    display: block;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+  }
+}
+.u-icn2-share, .u-icn2-fav, .u-icn2-del{
+  width: 16px;
+  height: 14px;
+  background-position: -90px 0;
+}
+.u-icn2-share{
+  &:hover{
+    background-position: -90px -20px;
+  }
+}
+.u-icn2-del{
+  background-position: -130px 0;
+  &:hover{
+    background-position: -130px -20px;
+  }
+}
+// 我的音乐中的我的视频
+.u-msk{
+  display: inline-block;
+}
+.u-msk-1{
+  width: 90px;
+  height: 20px;
+  background-position: 0 0;
+}
+.u-msk-2{
+  width: 159px;
+  height: 25px;
+  background-position: 0 -25px;
+}
+.u-icn2-mv{
+  width: 15px;
+  height: 10px;
+  background-position: -60px -310px;
 }

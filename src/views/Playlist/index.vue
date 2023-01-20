@@ -3,75 +3,34 @@
     <div class="g-mn4">
       <div class="g-wrap6">
         <!-- 歌单信息 -->
-        <div class="m-info clearfix">
-          <div class="cover u-cover u-cover-dj">
-            <img :src="playlist.coverImgUrl + '?param=200y200'" alt="" />
-            <i class="u-jp u-icn2 u-icn2-jp2" v-if="playlist.highQuality"></i>
-            <span class="msk"></span>
-          </div>
-          <div class="cnt">
-            <div class="cntc">
-              <!-- 标题 -->
-              <div class="hd clearfix">
-                <i class="fl u-icn2 u-icn2-jp1" v-if="playlist.highQuality"></i>
-                <i class="u-icn u-icn-13 fl pr" v-else></i>
-                <div :class="'tit '+(playlist.highQuality?'tit3':'')">
-                  <h2 class="f-ff2 f-brk">{{ playlist.name }}</h2>
-                </div>
-              </div>
-              <!-- 用户 -->
-              <div class="user clearfix">
-                <router-link :to="`/user/home?id=${playlist?.creator?.userId}`" class="face">
-                  <img :src="playlist?.creator?.avatarUrl + '?param=40y40'" alt="" />
-                </router-link>
-                <span class="name">
-                  <router-link :to="`/user/home?id=${playlist?.creator?.userId}`" class="s-fc7">{{ playlist?.creator?.nickname }}</router-link>
-                </span>
-                <img :src="playlist?.creator?.avatarDetail?.identityIconUrl" alt="" v-if="playlist?.creator?.avatarDetail" />
-                <span class="time s-fc4">{{ playlist.createTime | crteTime }} 创建</span>
-              </div>
-              <!-- 按钮 -->
-              <div class="btns clearfix">
-                <a href="javascript:;" class="u-btn2 u-btn2-2 u-btni-addply fl" title="播放">
-                  <i>
-                    <em class="ply"></em>
-                    播放
-                  </i>
-                </a>
-                <a href="javascript:;" class="u-btni u-btni-add" title="添加到播放列表"></a>
-                <a href="javascript:;" class="u-btni u-btni-fav">
-                  <i>({{ playlist.subscribedCount | subCount }})</i>
-                </a>
-                <a href="javascript:;" class="u-btni u-btni-share">
-                  <i>({{ playlist.shareCount }})</i>
-                </a>
-                <a href="javascript:;" class="u-btni u-btni-dl">
-                  <i>下载</i>
-                </a>
-                <a href="javascript:;" class="u-btni u-btni-cmmt">
-                  <i>({{ playlist.commentCount }})</i>
-                </a>
-              </div>
-              <!-- 标签 -->
-              <div class="tags clearfix">
-                <b>标签：</b>
-                <router-link :to="`/found/playlist/?cat=${item}&order=hot`" class="u-tag" v-for="item in playlist.tags">
-                  <i>{{ item }}</i>
-                </router-link>
-              </div>
-              <!-- 介绍 -->
-              <p class="intr f-brk">
-                <b>介绍：</b>
-                <template v-for="item in intr">
-                  {{ item }}
-                  <br />
-                </template>
-              </p>
+        <Loading v-if="Object.keys(playlist).length===0"/>
+        <PlaylistInfo :playlist="playlist" v-else />
+        <!-- 歌单 -->
+        <div class="n-songtb">
+          <div class="u-title u-title-1 clearfix">
+            <h3>
+              <span class="f-ff2">歌曲列表</span>
+            </h3>
+            <span class="sub s-fc3">
+              {{ playlist.trackCount }}首歌
+            </span>
+            <div class="more s-fc3">
+              播放：
+              <strong class="s-fc6">{{ playlist.playCount }}</strong>
+              次
+            </div>
+            <div class="out out-list s-fc3">
+              <i class="u-icn u-icn-95 fl"></i>
+              <a href="javascript:;" class="des s-fc7">生成外链播放器</a>
             </div>
           </div>
         </div>
-        <!-- 歌单 -->
-        <songtb :trackCount="playlist.trackCount" :tracks="playlist.tracks" :playCount="playlist.playCount" />
+        <Loading v-if="!newTracks"/>
+        <div class="j-falg" v-else>
+          <NotMusic v-if="playlist.trackCount===0" />
+          <Table1 :tracks="newTracks" v-else />
+          <DowClient />
+        </div>
         <!-- 评论 -->
         <div class="n-cmt"></div>
       </div>
@@ -121,45 +80,25 @@
 </template>
 
 <script>
-import songtb from '@/components/Songtb'
 import Multi from '@/components/Multi'
 import { getTopListDetail } from '@/api/toplist'
 import { getHotPalylist } from '@/api/disvocer'
 export default {
   name: 'Playlist',
-  components: {
-    songtb,Multi
-  },
-  filters: {
-    crteTime(val){
-      let y = new Date(val).getFullYear()
-      let m = new Date(val).getMonth()+1
-      let d = new Date(val).getDate()
-      return `${y}-${m}-${d}`
-    },
-    subCount(val){
-      if(val > 10000){
-        return parseInt(val/10000) + '万'
-      }
-      return val
-    }
-  },
-  computed: {
-    intr(){
-      // 2513714981
-      if(this.playlist.description){
-        // console.log(this.playlist.description.length)
-        return this.playlist.description.split('\n')
-      }else{
-        return ' '
-      }
-    },
-  },
+  components: {Multi},
   data(){
     return {
       playlist: {}, // 歌单信息
       hotPlayist: [], // 热门歌单信息
     }
+  },
+  computed: {
+    newTracks(){
+      if(this.playlist.tracks){
+        return this.playlist.tracks.slice(0,20)
+      }
+      return ''
+    },
   },
   methods: {
     // 获取歌单详情
@@ -202,6 +141,26 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.n-songtb{
+  margin-top: 27px;
+  .u-title-1{
+    height: 33px;
+    h3{
+      font-size: 20px;
+      line-height: 28px;
+    }
+    .sub{
+      margin: 9px 0 0 20px;
+    }
+    .more{
+      margin-top: 5px;
+    }
+    .out{
+      margin-top: 5px;
+      float: right;
+    }
+  }
+}
 .m-piclist{
   margin-left: -13px;
   padding-bottom: 25px;
