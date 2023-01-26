@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :style="{overflowY: isShow||!footerShow ? 'hidden' : 'visible'}"  @click="handleClick_ChlirenCompontent">
+  <div id="app" :style="{overflowY: isShow||!footerShow ? 'hidden' : 'visible'}"  @click="handleClick_ChlirenCompontent" ref="app">
     <Header />
     <router-view />
     <Footer v-if="footerShow" />
@@ -11,6 +11,8 @@
         <LoginQR />
       </div>
     </div>
+    <!-- 底部音乐播放器 -->
+    <MusicPlayer ref="musicPlayer" />
   </div>
 </template>
 
@@ -18,17 +20,20 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import LoginQR from '@/components/LoginQR'
+import MusicPlayer from '@/components/MusicPlayer'
 import { mapState, mapActions } from 'vuex'
 export default {
   components: {
-    Header,Footer,LoginQR
+    Header,Footer,LoginQR,MusicPlayer
   },
   computed: {
-    ...mapState('login', ['isShow'])
+    ...mapState('login', ['isShow']),
+    ...mapState('music', ['listShow'])
   },
   data(){
     return {
       footerShow: true,
+      scroll: true,
     }
   },
   methods: {
@@ -39,14 +44,33 @@ export default {
       }else{
         this.$bus.$emit('setCatShow')
       }
+      if(!this.$refs.musicPlayer.$el.contains(e.target)&&this.listShow){
+        this.$bus.$emit('closeList')
+      }
     },
     // 返回顶部
     goTop(){
       window.scrollTo(0,0)
-    }
+    },
+    // 禁用主页面滚动
+    stopScroll(e){
+      if(!this.scroll){
+        e.preventDefault()
+      }
+    },
   },
   created(){
     this.getFirstToplistId()
+    this.$bus.$on('forbidScroll',(data) => {
+      this.scroll = data
+    })
+  },
+  mounted(){
+    this.$refs.app.addEventListener('wheel',this.stopScroll,{ passive: false })
+  },
+  beforeDestroy(){
+    this.$refs.app.removeEventListener('wheel',this.stopScroll)
+    this.$bus.$off('forbidScroll')
   },
   watch: {
     '$route.fullPath': {
@@ -67,6 +91,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+/*html{
+  &::-webkit-scrollbar{
+    width: 17px!important;
+  }
+}*/
 .m-back{
   display: block;
   position: fixed;

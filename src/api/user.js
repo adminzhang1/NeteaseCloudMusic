@@ -62,3 +62,10 @@ export const getDjSublist = (cookie,timestamp = new Date().getTime()) => {
     cookie
   })
 }
+// 检查歌曲是否有版权
+export const CheckMusic = (id,cookie,timestamp = new Date().getTime()) => {
+  return http.post(`/check/music?timestamp=${timestamp}`,{
+    id,
+    cookie
+  })
+}

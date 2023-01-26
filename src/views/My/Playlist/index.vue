@@ -20,7 +20,7 @@
       <!-- 歌曲列表 -->
       <div class="j-falg">
         <NotMusic v-if="playlist.trackCount===0" />
-        <Table1 :tracks="playlist.tracks" v-else />
+        <Table1 :tracks="playlist.tracks" :userid="playlist.userId" :playid="playlist.id" v-else />
       </div>
       <!-- 评论 -->
       <div class="f-mgt40">

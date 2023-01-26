@@ -28,7 +28,7 @@
         <Loading v-if="!newTracks"/>
         <div class="j-falg" v-else>
           <NotMusic v-if="playlist.trackCount===0" />
-          <Table1 :tracks="newTracks" v-else />
+          <Table1 :tracks="newTracks" :userid="playlist.userId" :playid="playlist.id" v-else />
           <DowClient />
         </div>
         <!-- 评论 -->

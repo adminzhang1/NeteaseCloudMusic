@@ -12,11 +12,11 @@ import Loading from '@/components/Loading'
 import PlaylistInfo from '@/components/Info/PlaylistInfo.vue'
 // 歌单操作按钮
 import Disable from '@/components/PlayBtns/Disable.vue'
-import DisFavBtns from '@/components/PlayBtns/DisFavBtns.vue'
 import CountBtns from '@/components/PlayBtns/CountBtns.vue'
 // 歌曲列表没有歌曲
 import NotMusic from '@/components/NotMusic'
 // 歌曲操作按钮
+import Opt from '@/components/Opt'
 import FiveOpt from '@/components/Opt/FiveOpt.vue'
 import FourOpt from '@/components/Opt/FourOpt.vue'
 // 歌曲列表表格
@@ -32,11 +32,11 @@ Vue.component('Loading',Loading)
 Vue.component('PlaylistInfo',PlaylistInfo)
 
 Vue.component('Disable',Disable)
-Vue.component('DisFavBtns',DisFavBtns)
 Vue.component('CountBtns',CountBtns)
 
 Vue.component('NotMusic',NotMusic)
 
+Vue.component('Opt',Opt)
 Vue.component('FiveOpt',FiveOpt)
 Vue.component('FourOpt',FourOpt)
 

@@ -6,6 +6,9 @@
 html{
   height: 100%;
   font-size: 12px;
+  // &::-webkit-scrollbar{
+  //   width: 17px!important;
+  // }
 }
 body{
   height: 100%;
@@ -74,8 +77,6 @@ input[type="password"]::-ms-reveal{
   outline: none;
 }
 img{
-  max-width: 100%;
-  max-height: 100%;
   vertical-align: middle;
 }
 img, .txt{
@@ -91,6 +92,7 @@ li {
   position: relative;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
   // user-select: none;
 }
 .container{
@@ -200,6 +202,12 @@ li {
 }
 .f-fw0{
   font-weight: normal;
+}
+.f-tdu{
+  text-decoration: underline;
+  &:hover{
+    text-decoration: underline;
+  }
 }
 // 内容
 .g-wrap{
@@ -420,6 +428,21 @@ li {
 .u-msk{
   background: url('@/assets/icons/mask.png') no-repeat 0 9999px;
 }
+.m-playbar .updn .left, .m-playbar .updn .right, .m-playbar .updn .btn, .m-playbar .bg, .m-playbar .btns a, .m-playbar .head .mask, .m-playbar .icn, .m-playbar .ctrl, .m-playbar .tip, .m-vol .curr, .m-playbar .words .mv, .m-vol .barbg, .m-playbar .words .src{
+  background: url('@/assets/icons/playbar.png') no-repeat 0 9999px;
+}
+.m-pbar .barbg, .m-pbar .cur, .m-pbar .rdy, .m-pbar .left{
+  background: url('@/assets/icons/statbar.png') no-repeat 0 9999px;
+}
+.m-pbar .btn, .m-vol .btn{
+  background: url('@/assets/icons/iconall.png') no-repeat;
+}
+.m-playbar .listhd, .m-playbar .listbd{
+  background: url('@/assets/icons/playlist_bg.png') no-repeat;
+}
+.m-playbar .list .close, .m-playbar .playicn, .m-playbar .ico{
+  background: url('@/assets/icons/playlist.png') no-repeat 0 9999px;
+}
 // a标签的取消下划线
 .u-btn2,.u-btn2:hover{
   text-decoration: none;
@@ -537,6 +560,12 @@ li {
   margin-left: -3px;
   padding-right: 0;
   background-position: 0 -1588px;
+  &:hover{
+    background-position: -40px -1588px;
+  }
+  &:active{
+    background-position: -80px -1588px;
+  }
 }
 .u-btn2-2{
   color: #fff;
@@ -1552,7 +1581,7 @@ div.u-page .zbtn{
       columns: #999;
     }
   }
-  .ply-z-slt,.ply-z-slt:hover{
+  .play-z-slt,.play-z-slt:hover{
     background-position: -20px -128px;
   }
   // 标题
@@ -1624,6 +1653,25 @@ div.u-page .zbtn{
     a:hover{
       text-decoration: underline;
     }
+  }
+  // 禁用的
+  .dis *{
+    color: #bbb;
+  }
+  .dis .ply,.dis .ply:hover{
+    opacity: 0.5;
+    background-position: 0 -103px;
+    cursor: default;
+  }
+  .dis .mv,.dis .mv:hover{
+    background-position: -60px -151px;
+    cursor: default;
+  }
+  .dis.z-hover .u-dur,.dis:hover .u-dur{
+    display: block;
+  }
+  .dis.z-hover .candel,.dis:hover .candel{
+    display: none;
   }
 }
 // 歌单头部信息样式
@@ -1882,4 +1930,52 @@ div.u-page .zbtn{
   width: 15px;
   height: 10px;
   background-position: -60px -310px;
+}
+// 歌曲控制台
+.m-playbar .btns, .m-playbar .head, .m-playbar .play, .m-playbar .volum, .m-playbar .oper{
+  float: left;
+}
+.m-pbar, .m-pbar .barbg{
+  width: 466px;
+}
+.m-pbar{
+  position: relative;
+  .barbg,.cur,.rdy{
+    height: 9px;
+    background-position: right 0;
+  }
+  .rdy{
+    background-position: right -30px;
+  }
+  .cur{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-position: left -66px;
+  }
+  .btn{
+    position: absolute;
+    top: -7px;
+    right: -13px;
+    width: 22px;
+    height: 24px;
+    margin-left: -11px;
+    background-position: 0 -250px;
+    &:hover{
+      background-position: 0 -280px;
+    }
+    i{
+      visibility: hidden;
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      background: url('../icons/loading.gif');
+    }
+  }
+  .z-load i{
+    visibility: visible;
+    cursor: default;
+  }
 }

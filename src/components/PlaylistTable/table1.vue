@@ -1,5 +1,6 @@
 <template>
-  <table class="m-table">
+  <Loading v-if="load && tracklist.length === 0" />
+  <table class="m-table" v-else>
     <thead>
       <tr>
         <th class="first w1">
@@ -20,11 +21,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(item,index) in tracks" :key="item.id" :class="index%2===0?'even':''">
+      <tr v-for="(item,index) in tracklist" :key="item.id" :class="(item.listen.success?'':'dis ')+(index%2===0?'even':'')">
         <!-- 序号和播放 -->
         <td class="left">
           <div class="hd">
-            <span class="ply"></span>
+            <span :class="'ply '+(playingSongId===item.id?'play-z-slt':'')"></span>
             <span class="num">{{ index+1 }}</span>
           </div>
         </td>
@@ -61,8 +62,10 @@
         </td>
         <!-- 时长 -->
         <td class="s-fc3">
-          <div class="u-dur">{{ item.dt | duration }}</div>
-          <FiveOpt />
+          <div :class="'u-dur '+(!item.listen.success && userid === detail.profile?.userId?'candel':'')">{{ item.dt | duration }}</div>
+          <Opt :type="1" :playId="playid" :song="item" v-if="item.listen.success && userid === detail.profile?.userId" />
+          <Opt :type="2" :playId="playid" :song="item" v-else-if="item.listen.success && userid !== detail.profile?.userId" />
+          <Opt :type="3" :playId="playid" :song="item" v-else />
         </td>
         <!-- 歌手 -->
         <td>
@@ -84,17 +87,50 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { CheckMusic } from '@/api/user'
 export default {
   name: 'Playlisttable1',
   props: {
     tracks: {
       type: Array,
       required: true,
+    },
+    userid: {
+      type: Number,
+      required: true,
+    },
+    playid: {
+      type: Number,
+      required: true,
     }
+  },
+  computed: {
+    ...mapState('music',['playingSongId']),
+  },
+  data(){
+    return {
+      load: false,
+      tracklist: [],
+    }
+  },
+  methods: {
+    async check(){
+      try{
+        this.load = true
+        let res = await Promise.all(this.tracks.map(item => CheckMusic(item.id,this.cookie)))
+        this.tracklist = this.tracks.map((item,index) => {
+          this.$set(this.tracks[index],'listen',res[index])
+          return item
+        })
+        this.load = false
+      }catch(e){
+        throw e
+      }
+    }
+  },
+  created(){
+    this.check()
   }
 }
 </script>
-
-<style lang="less" scoped>
-
-</style>
