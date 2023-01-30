@@ -32,8 +32,7 @@
             <span class="by f-thide fl" v-if="playingSongId">
               <span :title="Songlist[songIndex].ar.map(a => a.name).join('/')">
                 <template v-for="(ar,i) in Songlist[songIndex].ar">
-                  <router-link :to="`/artist?id=${ar.id}`" hidefocus="true">{{ ar.name }}</router-link>{{ i===Songlist[songIndex].ar.length-1?'':'/' }}
-                </template>
+                  <router-link :to="`/artist?id=${ar.id}`" hidefocus="true">{{ ar.name }}</router-link>{{ i===Songlist[songIndex].ar.length-1?'':'/' }}</template>
               </span>
             </span>
             <router-link :to="`/playlist?id=${Songlist[songIndex].playId}`" class="src" title="来自歌单" @click.native="close" v-if="playingSongId&&Songlist[songIndex].playId"></router-link>
@@ -163,7 +162,7 @@
         </div>
       </div>
     </div>
-    <audio :src="songDetail.url?songDetail.url:''" class="au" ref="audio"></audio>
+    <audio :src="songDetail.url?songDetail.url:''" class="au" ref="audio">{{  }}</audio>
   </div>
 </template>
 
@@ -172,7 +171,29 @@ import { mapState,mapMutations,mapActions } from 'vuex'
 export default {
   name: 'MusicPlayer',
   computed: {
-    ...mapState('music',['show','fix','playingSongId','play','songLoading','songIndex','Songlist','songDetail','listShow'])
+    ...mapState('music',['show','fix','playingSongId','play','songLoading','songIndex','Songlist','songDetail','listShow']),
+    // a(){
+    //   // console.log(this.Songlist.length)
+    //   // console.log(this.$refs)
+    //   if(this.Songlist.length === 0){
+    //     this.$nextTick(() => {
+    //       this.$refs.listScrol.style.height = '260px'
+    //       this.$refs.listScrol.style.display = 'none'
+    //     })
+    //   }else{
+    //     this.$nextTick(() =>{
+    //       console.log(this.$refs)
+    //       if(this.$refs.list.clientHeight<260){
+    //         this.$refs.listScrol.style.height = '260px'
+    //         this.$refs.listScrol.style.display = 'none'
+    //       }else{
+    //         this.$refs.listScrol.style.height = ((260/this.$refs.list.clientHeight)*260).toFixed(3)+'px'
+    //         this.$refs.listScrol.style.display = 'block'
+    //       }
+    //     })
+    //   }
+    //   return
+    // }
   },
   data(){
     return {
@@ -316,6 +337,7 @@ export default {
       }
     },
     Songlist: {
+      immediate: true,
       deep: true,
       handler(val){
         if(val.length === 0){
@@ -324,16 +346,19 @@ export default {
             this.$refs.listScrol.style.display = 'none'
           })
         }else{
-          if(this.$refs.list.clientHeight<260){
-            this.$refs.listScrol.style.height = '260px'
-            this.$refs.listScrol.style.display = 'none'
-          }else{
-            this.$refs.listScrol.style.height = ((260/this.$refs.list.clientHeight)*260).toFixed(3)+'px'
-            this.$refs.listScrol.style.display = 'block'
-          }
+          this.$nextTick(() => {
+            console.log(28*this.Songlist.length)
+            if((28*this.Songlist.length)<260){
+              this.$refs.listScrol.style.height = '260px'
+              this.$refs.listScrol.style.display = 'none'
+            }else{
+              this.$refs.listScrol.style.height = ((260/(28*this.Songlist.length))*260).toFixed(3)+'px'
+              this.$refs.listScrol.style.display = 'block'
+            }
+          })
         }
       },
-    }
+    },
   },
 }
 </script>

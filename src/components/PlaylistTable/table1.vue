@@ -1,5 +1,5 @@
 <template>
-  <Loading v-if="load && tracklist.length === 0" />
+  <Loading v-if="tracks.length === 0" />
   <table class="m-table" v-else>
     <thead>
       <tr>
@@ -21,11 +21,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(item,index) in tracklist" :key="item.id" :class="(item.listen.success?'':'dis ')+(index%2===0?'even':'')">
+      <tr v-for="(item,index) in tracks" :key="item.id" :class="(item.listen.success?'':'dis ')+(index%2===0?'even':'')">
         <!-- 序号和播放 -->
         <td class="left">
           <div class="hd">
-            <span :class="'ply '+(playingSongId===item.id?'play-z-slt':'')"></span>
+            <span :class="'ply '+(playingSongId===item.id?'play-z-slt':'')" @click="play(item)"></span>
             <span class="num">{{ index+1 }}</span>
           </div>
         </td>
@@ -65,7 +65,8 @@
           <div :class="'u-dur '+(!item.listen.success && userid === detail.profile?.userId?'candel':'')">{{ item.dt | duration }}</div>
           <Opt :type="1" :playId="playid" :song="item" v-if="item.listen.success && userid === detail.profile?.userId" />
           <Opt :type="2" :playId="playid" :song="item" v-else-if="item.listen.success && userid !== detail.profile?.userId" />
-          <Opt :type="3" :playId="playid" :song="item" v-else />
+          <Opt :type="3" :playId="playid" :song="item" v-else-if="item.listen.success===false && userid === detail.profile?.userId" />
+          <Opt :type="4" :playId="playid" :song="item" v-else />
         </td>
         <!-- 歌手 -->
         <td>
@@ -87,8 +88,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { CheckMusic } from '@/api/user'
+import { mapState,mapActions } from 'vuex'
 export default {
   name: 'Playlisttable1',
   props: {
@@ -108,29 +108,18 @@ export default {
   computed: {
     ...mapState('music',['playingSongId']),
   },
-  data(){
-    return {
-      load: false,
-      tracklist: [],
-    }
-  },
   methods: {
-    async check(){
-      try{
-        this.load = true
-        let res = await Promise.all(this.tracks.map(item => CheckMusic(item.id,this.cookie)))
-        this.tracklist = this.tracks.map((item,index) => {
-          this.$set(this.tracks[index],'listen',res[index])
-          return item
-        })
-        this.load = false
-      }catch(e){
-        throw e
-      }
+    ...mapActions('music',['newPlay']),
+    play(song){
+      this.newPlay([{
+          songName: song.name,
+          songId: song.id,
+          ar: song.ar,
+          dt: song.dt,
+          picUrl: song.al.picUrl
+        }])
+      this.$bus.$emit('addPlayList','已开始播放')
     }
-  },
-  created(){
-    this.check()
   }
 }
 </script>

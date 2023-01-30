@@ -17,30 +17,8 @@
               <span class="s-fc4"> ({{ update }})</span>
             </div>
             <div class="btns clearfix">
-              <!-- 播放 -->
-              <a href="javascript:;" class="u-btn2 u-btn2-2 u-btni-addply" title="播放">
-                <i>
-                  <em class="ply"></em>
-                  播放
-                </i>
-              </a>
-              <a href="javascript:;" class="u-btni u-btni-add" title="添加到播放列表"></a>
-              <!-- 收藏 -->
-              <a href="javascript:;" class="u-btni u-btni-fav">
-                <i>({{ ListDetail.subscribedCount }})</i>
-              </a>
-              <!-- 分享 -->
-              <a href="javascript:;" class="u-btni u-btni-share">
-                <i>({{ ListDetail.shareCount }})</i>
-              </a>
-              <!-- 下载 -->
-              <a href="javascript:;" class="u-btni u-btni-dl">
-                <i>下载</i>
-              </a>
-              <!-- 评论 -->
-              <a href="javascript:;" class="u-btni u-btni-cmmt">
-                <i>({{ ListDetail.commentCount }})</i>
-              </a>
+              <Disable v-if="ListDetail.trackCount===0||newTracks.length===0" />
+              <CountBtns :subCount="ListDetail.subscribedCount" :shaCount="ListDetail.shareCount" :commCount="ListDetail.commentCount" :fav="false" :format="false" v-else />
             </div>
           </div>
         </div>
@@ -61,8 +39,7 @@
       <!-- 歌曲列表 -->
       <div id="song-list-pre-cache">
         <div class="j-flag">
-          <table class="m-table m-table-rank">
-            <!-- 表头 -->
+          <!-- <table class="m-table m-table-rank">
             <thead>
               <tr>
                 <th class="first w1"></th>
@@ -79,7 +56,7 @@
             </thead>
             <tbody>
               <tr :class="index % 2 === 0 ? 'even' : ''" v-for="(item,index) in tracks" :key="item.id">
-                <!-- 顺序 -->
+                <!- 顺序 ->
                 <td>
                   <div class="hd">
                     <span class="num">{{ index + 1 }}</span>
@@ -102,35 +79,29 @@
                     </div>
                   </div>
                 </td>
-                <!-- 标题 -->
+                <!- 标题 ->
                 <td :class="index < 3 ? 'rank' : ''">
                   <div class="clearfix">
                     <div class="tt">
-                      <!-- 歌曲封面 -->
                       <router-link :to="`/song?id=${item.id}`" v-if="index < 3">
                         <img :src="item.al.picUrl + '?param=50y50&quality=100'" alt="" class="rpic" />
                       </router-link>
-                      <!-- 播放按钮 -->
                       <span class="ply"></span>
                       <div class="ttc">
-                        <!-- 歌曲名字、后缀 -->
                         <span class="txt">
-                          <!-- 名字 -->
                           <router-link :to="`/song?id=${item.id}`">
                             <b :title="item.name + (item.tns ? '-' + item.tns.join('') : '')">
                               {{ item.name }}
                             </b>
                           </router-link>
-                          <!-- 后缀 -->
                           <span v-if="item.tns" class="s-fc8" :title="item.tns.join('')"> - ({{ item.tns.join('') }})</span>
-                          <!-- mv按钮 -->
                           <span class="mv" title="播放mv" v-if="item.mv"></span>
                         </span>
                       </div>
                     </div>
                   </div>
                 </td>
-                <!-- 时长 -->
+                <!- 时长 ->
                 <td class="s-fc3">
                   <span class="u-dur">{{ item.dt | duration }}</span>
                   <div class="opt hshow">
@@ -140,7 +111,7 @@
                     <a href="javascript:;" title="下载" class="icn icn-dl"></a>
                   </div>
                 </td>
-                <!-- 歌手 -->
+                <!- 歌手 ->
                 <td>
                   <div class="text" :title="item.ar.map(i => i.name).join('/')">
                     <span :title="item.ar.map(i => i.name).join('/')">
@@ -150,7 +121,8 @@
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
+          <Table2 :tracks="newTracks" :ListDetail="ListDetail" :userid="ListDetail.userId" v-if="ListDetail.trackCount!==0&&Object.keys(ListDetail).length !== 0" />
         </div>
       </div>
       <!-- 下载客户端 -->
@@ -173,15 +145,18 @@
 
 <script>
 import Dowclient from '@/components/Downloadclient'
+import Table2 from '@/components/PlaylistTable/table2.vue'
 import { getTopListDetail } from '@/api/toplist'
-import { mapState } from 'vuex'
+import { CheckMusic } from '@/api/user'
+import { mapState,mapActions } from 'vuex'
 export default {
   name: 'toplistRight',
   components: {
-    Dowclient,
+    Dowclient,Table2
   },
   computed: {
-    ...mapState('toplist',['defaultId','selectId','update','feature'])
+    ...mapState('toplist',['defaultId','selectId','update','feature']),
+    ...mapState('music',['Songlist']),
   },
   filters: {
     updateTime(val){
@@ -203,10 +178,11 @@ export default {
   data(){
     return {
       ListDetail: {}, // 榜单内部数据
-      tracks: [] // 歌曲列表
+      newTracks: [], // 歌曲列表
     }
   },
   methods: {
+    ...mapActions('music',['playPlaylist','addPlaylist']),
     // 获取歌单内部详情信息
     async toplistDetail(id){
       try{
@@ -214,9 +190,11 @@ export default {
         if(res.code === 200){
           this.ListDetail = res.playlist
           if(this.feature){
-            this.tracks = res.playlist.tracks
+            // this.newTracks = res.playlist.tracks
+            this.check(res.playlist.tracks)
           }else{
-            this.tracks = res.playlist.tracks.slice(0,10)
+            // this.newTracks = res.playlist.tracks.slice(0,10)
+            this.check(res.playlist.tracks.slice(0,10))
           }
         }else{
           throw '获取榜单内部数据失败'
@@ -224,10 +202,50 @@ export default {
       }catch(e){
         throw e
       }
+    },
+    // 检查歌曲是否可听
+    async check(tracks){
+      try{
+        let res = await Promise.all(tracks.map(item => CheckMusic(item.id,this.cookie)))
+        this.newTracks = tracks.map((item,index) => {
+          this.$set(tracks[index],'listen',res[index])
+          return item
+        })
+      }catch(e){
+        throw e
+      }
     }
   },
   created(){
     this.toplistDetail(this.selectId)
+    this.$bus.$on('playList',()=>{
+      let t = this.newTracks.filter(item => item.listen.success).map(item => {
+        return {
+          songName: item.name,
+          songId: item.id,
+          playId: this.ListDetail.id,
+          ar: item.ar,
+          dt: item.dt,
+          picUrl: item.al.picUrl
+        }
+      })
+      this.playPlaylist(t)
+    })
+    this.$bus.$on('addList',()=>{
+      let t = this.newTracks.filter(item => item.listen.success).map(item => {
+        return {
+          songName: item.name,
+          songId: item.id,
+          playId: this.ListDetail.id,
+          ar: item.ar,
+          dt: item.dt,
+          picUrl: item.al.picUrl
+        }
+      })
+      if(!t.map(item => this.Songlist.some(a => item.songId === a.songId)).every(item => item)){
+        this.addPlaylist(t)
+      }
+    })
   },
   watch: {
     selectId: {
@@ -370,99 +388,6 @@ export default {
     }
     .more{
       margin-top: 5px;
-    }
-  }
-  .m-table-rank{
-    tr:hover{
-      .hshow{
-        display: block;
-        position: relative;
-        margin-right: -10px;
-      }
-      .u-dur{
-        display: none;
-      }
-    }
-    .first{
-      width: 77px;
-    }
-    .even{
-      td{
-        background-color: #f7f7f7;
-      }
-    }
-    .hd{
-      height: 18px;
-      .num{
-        float: left;
-        width: 25px;
-        margin-left: 0;
-        text-align: center;
-        color: #999;
-      }
-      .rk{
-        float: right;
-        width: 32px;
-        margin-right: -5px;
-        text-align: center;
-        .ico{
-          padding-left: 8px;
-          line-height: 17px;
-          font-size: 10px;
-          font-family: Arial, Helvetica, sans-serif;
-        }
-        .u-icn-75{
-          display: block;
-          float: none;
-          margin: 0 auto;
-          padding-left: 0;
-        }
-      }
-    }
-    td{
-      &.rank{
-        padding-top: 10px;
-        padding-bottom: 10px;
-        .ply{
-          margin-top: 17px;
-        }
-        .ttc{
-          margin-top: 16px;
-        }
-        .txt{
-          max-width: 67%;
-        }
-      }
-    }
-    .tt{
-      float: left;
-      width: 100%;
-      .ply{
-        margin-right: 8px;
-      }
-    }
-    .rpic{
-      float: left;
-      width: 50px;
-      height: 50px;
-      margin-right: 14px;
-    }
-    .ttc{
-      height: 18px;
-      margin-right: 20px;
-    }
-    .txt{
-      max-width: 88%;
-      a:hover{
-        text-decoration: underline;
-        color: #333;
-      }
-    }
-    .opt{
-      .u-icn-81{
-        float: left;
-        margin-top: 2px;
-      }
     }
   }
   .n-cmt{

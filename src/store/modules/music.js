@@ -77,6 +77,38 @@ export default {
       await context.dispatch('SongUrl',songid)
       context.state.play = true
     },
+    // 单曲点击直接开始播放
+    async newPlay(context,val){
+      if(context.state.Songlist.some(item => item.songId === val[0].songId)){
+        context.state.songIndex = context.state.Songlist.findIndex(item => item.songId === val[0].songId)
+        context.state.playingSongId = val[0].songId
+      }else{
+        context.commit('setPlaying',val)
+        context.state.songIndex = context.state.Songlist.length-1
+        context.state.playingSongId = val[0].songId
+      }
+      await context.dispatch('SongUrl',val[0].songId)
+      context.state.play = true
+    },
+    // 添加整个歌单并开始播放
+    async playPlaylist(context,val){
+      context.state.Songlist = []
+      context.commit('setPlaying',val)
+      context.state.songIndex = 0
+      context.state.playingSongId = val[0].songId
+      await context.dispatch('SongUrl',val[0].songId)
+      context.state.play = true
+    },
+    // 添加整个歌曲列表
+    async addPlaylist(context,val){
+      context.state.Songlist = []
+      context.state.playingSongId = null
+      context.state.Songlist = []
+      context.state.songIndex = 0
+      context.state.songDetail = {}
+      context.state.play = false
+      context.commit('setPlaying',val)
+    },
     // 获取歌曲播放url
     async SongUrl(context,id){
       let res = await getSongUrl(id)
@@ -123,7 +155,8 @@ export default {
     },
     // 添加歌曲列表
     setPlaying(state,val){
-      state.Songlist = [...state.Songlist,...val]
+      // state.Songlist = [...state.Songlist,...val]
+      state.Songlist = state.Songlist.concat(val)
     },
     // 清除歌单
     clearPlaylist(state){

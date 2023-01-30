@@ -1,10 +1,10 @@
 <template>
   <div class="opt hshow">
-    <a hidefocus="true" href="javascript:;" class="u-icn u-icn-81 icn-add" title="添加到播放列表" @click="addSonglist(song,playId)" v-if="type!==3"></a>
-    <a hidefocus="true" href="javascript:;" class="icn icn-fav" title="收藏"  v-if="type!==3"></a>
-    <a hidefocus="true" href="javascript:;" class="icn icn-share" title="分享"  v-if="type!==3"></a>
-    <a hidefocus="true" href="javascript:;" class="icn icn-dl" title="下载"  v-if="type!==3"></a>
-    <a hidefocus="true" href="javascript:;" class="icn icn-del" title="删除" v-if="type === 1 || type === 3"></a>
+    <a hidefocus="true" href="javascript:;" class="u-icn u-icn-81 icn-add" title="添加到播放列表" @click="addSonglist(song,playId)" v-if="type!==3&&type!==4"></a>
+    <a hidefocus="true" href="javascript:;" class="icn icn-fav" title="收藏"  v-if="type!==3&&type!==4"></a>
+    <a hidefocus="true" href="javascript:;" class="icn icn-share" title="分享"  v-if="type!==3&&type!==4"></a>
+    <a hidefocus="true" href="javascript:;" class="icn icn-dl" title="下载"  v-if="type!==3&&type!==4"></a>
+    <a hidefocus="true" href="javascript:;" class="icn icn-del" title="删除" v-if="(type===1||type===3)&&type!==4"></a>
   </div>
 </template>
 
@@ -32,9 +32,7 @@ export default {
   methods: {
     ...mapMutations('music',['setPlaying']),
     addSonglist(song,playId){
-      if(this.Songlist.some(item => item.songId === song.id)){
-        console.log('已存在')
-      }else{
+      if(!this.Songlist.some(item => item.songId === song.id)){
         this.setPlaying([{
           songName: song.name,
           songId: song.id,

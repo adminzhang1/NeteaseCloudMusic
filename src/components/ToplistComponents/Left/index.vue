@@ -1,5 +1,5 @@
 <template>
-  <div class="g-sd3">
+  <div class="g-sd3 g-sd3-1">
     <div class="n-minelst">
       <h2 class="f-ff1">云音乐特色榜</h2>
       <ul class="clearfix">

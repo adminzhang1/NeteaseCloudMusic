@@ -16,7 +16,7 @@ body{
   font-size: 12px;
   font-family: Arial, Helvetica, sans-serif;
   word-wrap: break-word;
-  word-break: break-all;
+  word-break: break-word;
   background: #f5f5f5;
 }
 h1,
@@ -248,6 +248,9 @@ li {
   width: 240px;
   position: fixed;
 
+}
+.g-sd3-1{
+  position: static;
 }
 .g-sd4{
   position: relative;
@@ -1345,12 +1348,9 @@ li {
   position: relative;
   display: block;
 }
-.u-cover-4{
-  width: 80px;
-  height: 80px;
-}
-.u-cover-4 .msk{
-  background-position: -145px -57px;
+.u-cover-3{
+  width: 50px;
+  height: 50px;
 }
 // 各种播放按钮图标
 .u-cover .icon-headset, .u-cover .icon-play{
@@ -1673,6 +1673,9 @@ div.u-page .zbtn{
   .dis.z-hover .candel,.dis:hover .candel{
     display: none;
   }
+  .dis .icn-add,.dis .icn-fav,.dis .icn-share,.dis .u-icn-81,.dis .icn-dl{
+    display: none;
+  }
 }
 // 歌单头部信息样式
 .m-info{
@@ -1799,6 +1802,82 @@ div.u-page .zbtn{
     height: 100%;
   }
 }
+// 歌曲头部信息
+.m-lycifo{
+  margin-top: -10px;
+  // 歌曲图片
+  .cvrwrap{
+    float: left;
+    width: 206px;
+    margin-right: -226px;
+    .out{
+      float: left;
+      margin: 20px 0 0 46px;
+    }
+    .des{
+      text-decoration: underline;
+    }
+  }
+  // 歌曲信息
+  .cnt{
+    float: right;
+    width: 414px;
+  }
+  .hd{
+    .lab{
+      float: left;
+    }
+  }
+  .tit{
+    position: relative;
+    top: -6px;
+    font-size: 24px;
+    margin-left: 64px;
+    *{
+      vertical-align: middle;
+    }
+    em{
+      margin-right: 7px;
+    }
+  }
+  .subtit{
+    margin: 1px 0 5px;
+    color: #bababa;
+  }
+  .des{
+    margin: 10px 0;
+    span{
+      color: #333;
+    }
+  }
+  .bd{
+    height: 299px;
+    margin-top: 13px;
+    line-height: 23px;
+  }
+  .bd-open{
+    height: auto;
+  }
+  .crl{
+    margin-top: 5px;
+  }
+  // 报错
+  .lrc-user{
+    text-align: right;
+    margin-top: 48px;
+    line-height: 30px;
+  }
+}
+.u-icn-37{
+  width: 54px;
+  height: 24px;
+  background-position: 0 -463px;
+}
+.u-icn-2{
+  width: 21px;
+  height: 18px;
+  background-position: 0 -18px;
+}
 // 歌单标签+icon图标
 .u-tag, .u-tag i{
   float: left;
@@ -1859,10 +1938,6 @@ div.u-page .zbtn{
   background-position: -45px -520px;
 }
 // 我的音乐中的我订阅的电台
-.u-cover-3{
-  width: 50px;
-  height: 50px;
-}
 .u-cover{
   img{
     display: block;
@@ -1977,5 +2052,93 @@ div.u-page .zbtn{
   .z-load i{
     visibility: visible;
     cursor: default;
+  }
+}
+// 歌单信息右侧的喜欢这个歌单的人a
+.m-piclist{
+  margin-left: -13px;
+  padding-bottom: 25px;
+  li,li img{
+    float: left;
+    width: 40px;
+    height: 40px;
+  }
+  li{
+    display: inline;
+    padding: 0 0 13px 13px;
+  }
+}
+// 单曲、歌单信息右侧的热门歌单或者相似歌单
+.m-rctlist{
+  margin-bottom: 25px;
+  li{
+    float: left;
+    width: 200px;
+    height: 50px;
+    margin-bottom: 15px;
+    line-height: 24px;
+  }
+  .cver,.cver img{
+    float: left;
+    width: 50px;
+    height: 50px;
+  }
+  .cver{
+    margin-right: -60px;
+  }
+  .info{
+    margin-left: 60px;
+    line-height: 24px;
+    a:hover{
+      text-decoration: underline;
+    }
+    p{
+      width: 140px;
+      img{
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        vertical-align: middle;
+      }
+    }
+  }
+  .by{
+    float: left;
+  }
+  .nm{
+    float: left;
+    max-width: 106px;
+    margin: 0 2px 0 4px;
+  }
+}
+// 单曲信息右侧的相似歌曲
+.m-sglist{
+  li{
+    margin-top: 10px;
+  }
+  .txt{
+    float: left;
+    width: 156px;
+    line-height: 16px;
+  }
+  .opr{
+    float: right;
+    position: relative;
+    top: 10px;
+    line-height: 32px;
+    a{
+      float: left;
+      width: 10px;
+      height: 11px;
+      background: url('../icons/icon2.png') no-repeat -9999px -9999px;
+      opacity: .9;
+    }
+    .play{
+      margin-right: 16px;
+      background-position: -69px -455px;
+    }
+    .add{
+      background-position: -87px -455px;
+    }
   }
 }

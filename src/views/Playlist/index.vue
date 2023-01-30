@@ -4,7 +4,7 @@
       <div class="g-wrap6">
         <!-- 歌单信息 -->
         <Loading v-if="Object.keys(playlist).length===0"/>
-        <PlaylistInfo :playlist="playlist" v-else />
+        <PlaylistInfo :playlist="playlist" :tracks="newTracks" v-else />
         <!-- 歌单 -->
         <div class="n-songtb">
           <div class="u-title u-title-1 clearfix">
@@ -28,7 +28,7 @@
         <Loading v-if="!newTracks"/>
         <div class="j-falg" v-else>
           <NotMusic v-if="playlist.trackCount===0" />
-          <Table1 :tracks="newTracks" :userid="playlist.userId" :playid="playlist.id" v-else />
+          <Table1 :tracks="newTracks" :userid="playlist.userId" :playid="playlist.id" v-if="playlist.trackCount!==0&&Object.keys(playlist).length !== 0" />
           <DowClient />
         </div>
         <!-- 评论 -->
@@ -80,25 +80,18 @@
 </template>
 
 <script>
-import Multi from '@/components/Multi'
 import { getTopListDetail } from '@/api/toplist'
 import { getHotPalylist } from '@/api/disvocer'
+import { CheckMusic } from '@/api/user'
 export default {
   name: 'Playlist',
-  components: {Multi},
   data(){
     return {
       playlist: {}, // 歌单信息
       hotPlayist: [], // 热门歌单信息
+      newTracks: [], // 新的歌曲列表
+      load: false,
     }
-  },
-  computed: {
-    newTracks(){
-      if(this.playlist.tracks){
-        return this.playlist.tracks.slice(0,20)
-      }
-      return ''
-    },
   },
   methods: {
     // 获取歌单详情
@@ -131,11 +124,33 @@ export default {
       }catch(e){
         throw e
       }
+    },
+    // 检查歌曲是否可听
+    async check(tracks){
+      try{
+        let res = await Promise.all(tracks.map(item => CheckMusic(item.id,this.cookie)))
+        this.newTracks = tracks.map((item,index) => {
+          this.$set(tracks[index],'listen',res[index])
+          return item
+        })
+      }catch(e){
+        throw e
+      }
     }
   },
   created(){
     this.ToplistDetail()
     this.hotPlaylist()
+  },
+  watch: {
+    'playlist.tracks': {
+      immediate: true,
+      handler(val){
+        if(val!==undefined){
+          this.check(val)
+        }
+      }
+    }
   }
 }
 </script>
@@ -159,61 +174,6 @@ export default {
       margin-top: 5px;
       float: right;
     }
-  }
-}
-.m-piclist{
-  margin-left: -13px;
-  padding-bottom: 25px;
-  li,li img{
-    float: left;
-    width: 40px;
-    height: 40px;
-  }
-  li{
-    display: inline;
-    padding: 0 0 13px 13px;
-  }
-}
-.m-rctlist{
-  margin-bottom: 25px;
-  li{
-    float: left;
-    width: 200px;
-    height: 50px;
-    margin-bottom: 15px;
-    line-height: 24px;
-  }
-  .cver,.cver img{
-    float: left;
-    width: 50px;
-    height: 50px;
-  }
-  .cver{
-    margin-right: -60px;
-  }
-  .info{
-    margin-left: 60px;
-    line-height: 24px;
-    a:hover{
-      text-decoration: underline;
-    }
-    p{
-      width: 140px;
-      img{
-        display: inline-block;
-        width: 13px;
-        height: 13px;
-        vertical-align: middle;
-      }
-    }
-  }
-  .by{
-    float: left;
-  }
-  .nm{
-    float: left;
-    max-width: 106px;
-    margin: 0 2px 0 4px;
   }
 }
 </style>

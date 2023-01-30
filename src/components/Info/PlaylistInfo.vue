@@ -28,9 +28,9 @@
           <span class="time s-fc4">{{ playlist.createTime | allDay }}&nbsp;创建</span>
         </div>
         <!-- 功能按钮 -->
-        <Disable v-if="playlist.trackCount===0" />
-        <CountBtns :subCount="playlist.subscribedCount" :shaCount="playlist.shareCount" :commCount="playlist.commentCount" :fav="false" v-else-if="userPlaylist.some(play => play.id===playlist.id)" />
-        <CountBtns  :subCount="playlist.subscribedCount" :shaCount="playlist.shareCount" :commCount="playlist.commentCount" :fav="true" v-else />
+        <Disable v-if="playlist.trackCount===0||tracks.length===0" />
+        <CountBtns :subCount="playlist.subscribedCount" :shaCount="playlist.shareCount" :commCount="playlist.commentCount" :fav="false" :format="true" v-else-if="userPlaylist.some(play => play.id===playlist.id)&&tracks.length!==0" />
+        <CountBtns  :subCount="playlist.subscribedCount" :shaCount="playlist.shareCount" :commCount="playlist.commentCount" :fav="true" :format="true" v-else />
         <!-- 标签 -->
         <div class="tags clearfix" v-if="playlist.tags.length!==0">
           <b>标签：</b>
@@ -68,15 +68,21 @@
 </template>
 
 <script>
+import { mapActions,mapState } from 'vuex'
 export default {
   name: 'PlaylistInfo',
   props: {
     playlist: {
       type: Object,
       required: true,
+    },
+    tracks: {
+      type: Array,
+      required: true
     }
   },
   computed: {
+    ...mapState('music',['Songlist']),
     allIntr(){
       return this.playlist.description.split('\n')
     },
@@ -89,6 +95,43 @@ export default {
     return {
       intrShow: false,
     }
+  },
+  methods: {
+    ...mapActions('music',['playPlaylist','addPlaylist'])
+  },
+  created(){
+    this.$bus.$on('playList',()=>{
+      let t = this.tracks.filter(item => item.listen.success).map(item => {
+        return {
+          songName: item.name,
+          songId: item.id,
+          playId: this.playlist.id,
+          ar: item.ar,
+          dt: item.dt,
+          picUrl: item.al.picUrl
+        }
+      })
+      this.playPlaylist(t)
+    })
+    this.$bus.$on('addList',()=>{
+      let t = this.tracks.filter(item => item.listen.success).map(item => {
+        return {
+          songName: item.name,
+          songId: item.id,
+          playId: this.playlist.id,
+          ar: item.ar,
+          dt: item.dt,
+          picUrl: item.al.picUrl
+        }
+      })
+      if(!t.map(item => this.Songlist.some(a => item.songId === a.songId)).every(item => item)){
+        this.addPlaylist(t)
+      }
+    })
+  },
+  beforeDestroy(){
+    this.$bus.$off('playList')
+    this.$bus.$off('addList')
   }
 }
 </script>

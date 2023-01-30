@@ -6,7 +6,7 @@
       <div class="j-falg">
         <!-- 头部信息 -->
         <div class="g-wrap">
-          <PlaylistInfo :playlist="playlist" />
+          <PlaylistInfo :playlist="playlist" :tracks="newTracks" />
         </div>
         <!-- 歌曲列表 -->
         <div class="u-title u-title-1 clearfix">
@@ -20,7 +20,7 @@
       <!-- 歌曲列表 -->
       <div class="j-falg">
         <NotMusic v-if="playlist.trackCount===0" />
-        <Table1 :tracks="playlist.tracks" :userid="playlist.userId" :playid="playlist.id" v-else />
+        <Table1 :tracks="newTracks" :userid="playlist.userId" :playid="playlist.id" v-if="playlist.trackCount!==0&&Object.keys(playlist).length !== 0" />
       </div>
       <!-- 评论 -->
       <div class="f-mgt40">
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { getPlaylistDetail } from '@/api/user'
+import { getPlaylistDetail,CheckMusic } from '@/api/user'
 export default {
   name: 'MyPlaylist',
   data(){
@@ -54,6 +54,7 @@ export default {
       loading: false,
       id: 0,
       playlist: {},
+      newTracks: [], // 新的歌曲列表
     }
   },
   methods: {
@@ -71,16 +72,36 @@ export default {
       }catch(e){
         throw e
       }
+    },
+    // 检查歌曲是否可听
+    async check(tracks){
+      try{
+        let res = await Promise.all(tracks.map(item => CheckMusic(item.id,this.cookie)))
+        this.newTracks = tracks.map((item,index) => {
+          this.$set(tracks[index],'listen',res[index])
+          return item
+        })
+      }catch(e){
+        throw e
+      }
     }
   },
   watch: {
     '$route.query.id': {
       immediate: true,
       handler(val){
-        // console.log(val)
+        this.newTracks = []
         if(val){
           this.id = parseInt(val)
           this.playlisData(val,this.cookie)
+        }
+      }
+    },
+    'playlist.tracks': {
+      immediate: true,
+      handler(val){
+        if(val!==undefined){
+          this.check(val)
         }
       }
     }
