@@ -206,6 +206,7 @@ export default {
     // 检查歌曲是否可听
     async check(tracks){
       try{
+        console.log(1)
         let res = await Promise.all(tracks.map(item => CheckMusic(item.id,this.cookie)))
         this.newTracks = tracks.map((item,index) => {
           this.$set(tracks[index],'listen',res[index])

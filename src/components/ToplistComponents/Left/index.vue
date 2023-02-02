@@ -61,7 +61,7 @@ export default {
       deep: true,
       handler(val){
         this.toplistDate1 = val.slice(0,4)
-      this.toplistDate2 = val.slice(4,this.toplist.length)
+        this.toplistDate2 = val.slice(4,this.toplist.length)
       }
     }
   }

@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr :class="(item.listen.success?'':'dis ')+(index % 2 === 0 ? 'even' : '')" v-for="(item,index) in tracks" :key="item.id">
+      <tr :class="(index % 2 === 0 ? 'even' : '')" v-for="(item,index) in tracks" :key="item.id">
         <!-- 顺序 -->
         <td>
           <div class="hd">
@@ -113,6 +113,7 @@ export default {
   methods: {
     ...mapActions('music',['newPlay']),
     play(song){
+      if(!song.listen.success)return;
       this.newPlay([{
           songName: song.name,
           songId: song.id,

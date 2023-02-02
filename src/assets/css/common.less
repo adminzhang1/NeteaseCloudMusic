@@ -209,9 +209,18 @@ li {
     text-decoration: underline;
   }
 }
+.f-tdn{
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+  }
+}
 // 内容
 .g-wrap{
   padding: 40px;
+}
+.g-wrap4{
+  padding: 0 10px 40px;
 }
 .g-wrap6{
   padding: 47px 30px 40px 39px;
@@ -224,6 +233,10 @@ li {
 }
 .g-wrap12{
   padding: 0 30px 40px 40px;
+}
+.g-mn2{
+  float: right;
+  width: 799px;
 }
 .g-mn3{
   height: 100%;
@@ -242,6 +255,11 @@ li {
 .g-mn6{
   float: left;
   width: 100%;
+}
+.g-sd2{
+  position: relative;
+  float: left;
+  width: 180px;
 }
 .g-sd3{
   float: left;
@@ -340,6 +358,9 @@ li {
 }
 .g-bd1{
   background: url('@/assets/icons/wrap1.png') repeat-y 100% 100%;
+}
+.g-bd2{
+  background: url('@/assets/icons/wrap2.png') repeat-y center 0;
 }
 .g-bd3{
   background: url('@/assets/icons/wrap3.png') repeat-y center 0;
@@ -1073,6 +1094,29 @@ li {
     .u-date:hover{
       text-decoration: none;
     }
+    &.line{
+      margin-bottom: 12px;
+      border-bottom: 1px dotted #999;
+    }
+    &.sml{
+      width: 130px!important;
+      height: 30px!important;
+      padding-bottom: 0;
+      line-height: 23px;
+      .nm-icn{
+        max-width: 105px;
+      }
+      .u-icn-5{
+        float: left!important;
+        margin: 4px 0 0 2px;
+      }
+    }
+    p{
+      width: 100%;
+      .u-icn{
+        margin-top: -1px;
+      }
+    }
   }
   .msk{
     position: absolute;
@@ -1089,6 +1133,11 @@ li {
     height: 17px;
     background-position: 0 0;
   }
+}
+.u-icn-5{
+  width: 17px;
+  height: 18px;
+  background-position: 0 -740px;
 }
 .u-cover-alb1 .icon-play, .u-cover-alb2 .icon-play, .u-cover-alb3 .icon-play{
   display: none;
@@ -2139,6 +2188,32 @@ div.u-page .zbtn{
     }
     .add{
       background-position: -87px -455px;
+    }
+  }
+}
+// 歌手姓名选择
+.n-ltlst{
+  margin-top: 20px;
+  margin-left: -3px;
+  li{
+    display: inline;
+    float: left;
+    margin-left: 3px;
+    font-size: 14px;
+    a{
+      float: left;
+      width: 21px;
+      line-height: 24px;
+      text-align: center;
+      &.z-slt,&.z-slt:hover{
+        background: @redColor;
+        border-radius: 2px;
+        color: #fff;
+      }
+    }
+    .ch{
+      width: 45px;
+      height: 24px;
     }
   }
 }

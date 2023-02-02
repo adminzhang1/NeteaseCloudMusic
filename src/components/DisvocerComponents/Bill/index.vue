@@ -1,7 +1,7 @@
 <template>
   <div class="n-bill">
     <div class="v-hd2">
-      <router-link to="/found/toplist" class="tit f-ff2">榜单</router-link>
+      <router-link to="/found/toplist" class="tit f-ff2 f-tdn">榜单</router-link>
       <span class="more">
         <router-link to="/found/toplist" class="s-fc3">更多</router-link>
         <i class="cor s-bg s-bg-6"></i>

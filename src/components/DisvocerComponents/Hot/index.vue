@@ -2,7 +2,7 @@
   <div class="n-rcmd">
     <!-- 标题 -->
     <div class="v-hd2">
-      <router-link to="/found/playlist" class="tit f-ff2">热门推荐</router-link>
+      <router-link to="/found/playlist" class="tit f-ff2 f-tdn">热门推荐</router-link>
       <div class="tab">
         <router-link to="/found/playlist?cat=华语" class="s-fc3">华语</router-link>
         <span class="line">|</span>

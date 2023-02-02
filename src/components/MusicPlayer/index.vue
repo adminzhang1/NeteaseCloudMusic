@@ -347,7 +347,6 @@ export default {
           })
         }else{
           this.$nextTick(() => {
-            console.log(28*this.Songlist.length)
             if((28*this.Songlist.length)<260){
               this.$refs.listScrol.style.height = '260px'
               this.$refs.listScrol.style.display = 'none'

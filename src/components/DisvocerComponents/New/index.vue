@@ -1,7 +1,7 @@
 <template>
   <div class="n-new">
     <div class="v-hd2">
-      <router-link to="/found/album" class="tit f-ff2">新碟上架</router-link>
+      <router-link to="/found/album" class="tit f-ff2 f-tdn">新碟上架</router-link>
       <span class="more">
         <router-link to="/found/album">更多</router-link>
         <i class="cor s-bg s-bg-6"></i>
